@@ -1,0 +1,80 @@
+<svg content='&lt;mxfile host="app.diagrams.net" modified="2026-04-02T00:00:00.000Z" agent="Codex" version="26.0.11" type="device"&gt;&lt;diagram id="course_roadmap.drawio" name="Page-1"&gt;zVldj6s2EP01fqyEMR/m0bDmXlXqVaV96DMXvAkqwVvibLL99R2DvRvAWbUKihtFynA8Nnjm+HhwECkOl29D9br/TTaiQ2HQXBB5QmGIoyCAH428T0gSGmA3tI1x+gSe27+FAa3bqW3EceaopOxU+zoHa9n3olYzrBoGeZ67vchuftfXaidWwHNddWv0j7ZR++W8dMN30e72ajG/Q2WdDXDcV408X0GEI1IMUqrJOlwK0eng2biYfigsbzh8PNsgevUv+6hWwdRGp7eqO5lZUsRjlOUo44gTRDFik0EQezJGXhiDZsbIrA98DZKaqap3Gz8lLvBo+V4dOgAwmEc1yD9FITs5ANLLHjzzl7brFlDVtbseLmuYnAA8fxODaiEzzDQc2qbpxs6yV4Y5OqzTtXkEbK7t4CgkOCKMJICbMMCw4nIzovgjVcBxIQ9CDe/gYjpEiYm4obdNwPmTKxE12P6KJpHBKkPP3cfIs/SBYTLozuZRVYNaZXOVBOgE6+VGnJ352CA0GM9DQ4J1bPA6MniTwIi++b+GJaQe49K1vVjHoW+Ylkq92LrqeGzrr1bs9QqaWqwwfq4p0axUdREfeAB5Gmqx4jFYO6FmWVzHchBdpdo3sWVoauxgTNIpIyCzkCV/naRt+OU4Sg+DSV7GANhGsHbmdxzlpwWwReCRfi69AJtut+g8WOT3d7WX/SjYJcoZ4iliEaJ87al98kA3gUFjxOJV6gd56hvRmESf960Sz6/VmJYzbOhzHlyvEmBBOX7+Az/IXKux9qiG2l6GWy2wpSQ71heJHStsI1Guw0cRKbyLSCMrSsRKxCliCcqSESm0sXLmT2xr8mBOXOTJWDRRwwd5wtQ3ecijyEPuJo8pGEFkqNYZt89CozakEOdlUjr3p7BMkrj0RKHIu/5Ej6JQtDWFzDtHaF8sUos4u4NqZSiLEY9QzhHD2woU4SXcwcEuyhOQKE/sir0LVPwodsX3724UUdjUMs2NjPsQqLDMXRSKWBJBQeaHQql3gUoeRaHkLgoVP364OJOiDARnIhjRFZSDadtWSoQXLhblQVx4K7OpdyFKH8Wi9E4hApKEY5k97WWZQfIPo7zRC5yZPX4j1jnYVqOeyrRMnUUUS3hKfL3EBd5Fij6KXvR+ehG9jZmayXVk8OvWipS6S6MCU4Z9lUYY+5akFyn1UfWKN1+9aEPRG+q9Ixvv9EUBfLPLugxeO0B5Q/T2BAPCVrV0gB0tG6sgqrsz6v0UP3jsKT4hc+LEDuKk0WbH+HD5+bfP2Hb15xnh/wA=&lt;/diagram&gt;&lt;/mxfile&gt;' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 620" width="1400" height="620">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fffaf1" />
+      <stop offset="100%" stop-color="#edf5f2" />
+    </linearGradient>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#143a36" />
+    </marker>
+  </defs>
+
+  <rect width="1400" height="620" fill="url(#bg2)" rx="32" />
+  <text x="700" y="72" text-anchor="middle" font-family="Hiragino Sans, Noto Sans JP, sans-serif" font-size="38" font-weight="700" fill="#143a36">8回のロードマップ</text>
+
+  <line x1="120" y1="315" x2="1280" y2="315" stroke="#143a36" stroke-width="8" marker-end="url(#arrow2)" />
+
+  <g font-family="Hiragino Sans, Noto Sans JP, sans-serif">
+    <g transform="translate(120,200)">
+      <rect width="135" height="140" rx="22" fill="#ffffff" stroke="#143a36" stroke-width="4" />
+      <text x="67.5" y="42" text-anchor="middle" font-size="30" font-weight="700" fill="#143a36">1</text>
+      <text x="67.5" y="78" text-anchor="middle" font-size="24" fill="#143a36">Python基礎</text>
+      <text x="67.5" y="110" text-anchor="middle" font-size="24" fill="#143a36">導入</text>
+    </g>
+    <g transform="translate(270,200)">
+      <rect width="135" height="140" rx="22" fill="#fff1e3" stroke="#9a4d16" stroke-width="4" />
+      <text x="67.5" y="42" text-anchor="middle" font-size="30" font-weight="700" fill="#9a4d16">2</text>
+      <text x="67.5" y="78" text-anchor="middle" font-size="24" fill="#9a4d16">可視化</text>
+      <text x="67.5" y="110" text-anchor="middle" font-size="24" fill="#9a4d16">EDA</text>
+    </g>
+    <g transform="translate(420,200)">
+      <rect width="135" height="140" rx="22" fill="#eef6f1" stroke="#2f665f" stroke-width="4" />
+      <text x="67.5" y="42" text-anchor="middle" font-size="30" font-weight="700" fill="#2f665f">3</text>
+      <text x="67.5" y="78" text-anchor="middle" font-size="24" fill="#2f665f">回帰</text>
+      <text x="67.5" y="110" text-anchor="middle" font-size="24" fill="#2f665f">基礎</text>
+    </g>
+    <g transform="translate(570,200)">
+      <rect width="135" height="140" rx="22" fill="#f3efe8" stroke="#8e6a4d" stroke-width="4" />
+      <text x="67.5" y="42" text-anchor="middle" font-size="30" font-weight="700" fill="#8e6a4d">4</text>
+      <text x="67.5" y="78" text-anchor="middle" font-size="24" fill="#8e6a4d">回帰モデル</text>
+      <text x="67.5" y="110" text-anchor="middle" font-size="24" fill="#8e6a4d">評価</text>
+    </g>
+    <g transform="translate(720,200)">
+      <rect width="135" height="140" rx="22" fill="#eef2fb" stroke="#4a6485" stroke-width="4" />
+      <text x="67.5" y="42" text-anchor="middle" font-size="30" font-weight="700" fill="#4a6485">5</text>
+      <text x="67.5" y="78" text-anchor="middle" font-size="24" fill="#4a6485">分類</text>
+      <text x="67.5" y="110" text-anchor="middle" font-size="24" fill="#4a6485">基礎</text>
+    </g>
+    <g transform="translate(870,200)">
+      <rect width="135" height="140" rx="22" fill="#fff3ec" stroke="#b05c36" stroke-width="4" />
+      <text x="67.5" y="42" text-anchor="middle" font-size="30" font-weight="700" fill="#b05c36">6</text>
+      <text x="67.5" y="78" text-anchor="middle" font-size="24" fill="#b05c36">CNN</text>
+      <text x="67.5" y="110" text-anchor="middle" font-size="24" fill="#b05c36">画像分類</text>
+    </g>
+    <g transform="translate(1020,200)">
+      <rect width="135" height="140" rx="22" fill="#edf7f7" stroke="#2a6e73" stroke-width="4" />
+      <text x="67.5" y="42" text-anchor="middle" font-size="30" font-weight="700" fill="#2a6e73">7</text>
+      <text x="67.5" y="78" text-anchor="middle" font-size="24" fill="#2a6e73">クラスタ</text>
+      <text x="67.5" y="110" text-anchor="middle" font-size="24" fill="#2a6e73">リング</text>
+    </g>
+    <g transform="translate(1170,200)">
+      <rect width="135" height="140" rx="22" fill="#fff7e8" stroke="#c18a1d" stroke-width="4" />
+      <text x="67.5" y="42" text-anchor="middle" font-size="30" font-weight="700" fill="#c18a1d">8</text>
+      <text x="67.5" y="78" text-anchor="middle" font-size="24" fill="#c18a1d">ミニ</text>
+      <text x="67.5" y="110" text-anchor="middle" font-size="24" fill="#c18a1d">PJ</text>
+    </g>
+  </g>
+
+  <g font-family="Hiragino Sans, Noto Sans JP, sans-serif" font-size="24" fill="#4d5d5a">
+    <text x="188" y="430" text-anchor="middle">環境に慣れる</text>
+    <text x="338" y="430" text-anchor="middle">観察する</text>
+    <text x="488" y="430" text-anchor="middle">予測する</text>
+    <text x="638" y="430" text-anchor="middle">比較する</text>
+    <text x="788" y="430" text-anchor="middle">判定する</text>
+    <text x="938" y="430" text-anchor="middle">画像を扱う</text>
+    <text x="1088" y="430" text-anchor="middle">構造を探す</text>
+    <text x="1238" y="430" text-anchor="middle">統合する</text>
+  </g>
+
+  <text x="700" y="535" text-anchor="middle" font-family="Hiragino Sans, Noto Sans JP, sans-serif" font-size="30" font-weight="700" fill="#143a36">可視化 → モデル化 → 評価 → 解釈 → 発表</text>
+</svg>

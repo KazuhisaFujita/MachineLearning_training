@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fffaf4" />
+      <stop offset="100%" stop-color="#edf6f2" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="700" rx="36" fill="url(#bg3)" />
+  <text x="600" y="76" text-anchor="middle" font-family="Hiragino Sans, Noto Sans JP, sans-serif" font-size="38" font-weight="700" fill="#143a36">学習手法の見取り図</text>
+
+  <g font-family="Hiragino Sans, Noto Sans JP, sans-serif">
+    <rect x="110" y="150" width="430" height="420" rx="28" fill="#ffffff" stroke="#2f665f" stroke-width="5" />
+    <text x="325" y="212" text-anchor="middle" font-size="34" font-weight="700" fill="#2f665f">教師あり学習</text>
+    <text x="325" y="258" text-anchor="middle" font-size="25" fill="#143a36">入力 + 正解ラベルあり</text>
+
+    <rect x="180" y="300" width="290" height="92" rx="18" fill="#eef6f1" stroke="#2f665f" stroke-width="3" />
+    <text x="325" y="355" text-anchor="middle" font-size="28" fill="#2f665f">回帰: 数値を予測</text>
+
+    <rect x="180" y="420" width="290" height="92" rx="18" fill="#eef2fb" stroke="#4a6485" stroke-width="3" />
+    <text x="325" y="475" text-anchor="middle" font-size="28" fill="#4a6485">分類: ラベルを予測</text>
+
+    <rect x="660" y="150" width="430" height="420" rx="28" fill="#ffffff" stroke="#9a4d16" stroke-width="5" />
+    <text x="875" y="212" text-anchor="middle" font-size="34" font-weight="700" fill="#9a4d16">教師なし学習</text>
+    <text x="875" y="258" text-anchor="middle" font-size="25" fill="#143a36">入力のみ、正解ラベルなし</text>
+
+    <rect x="730" y="345" width="290" height="92" rx="18" fill="#fff1e3" stroke="#9a4d16" stroke-width="3" />
+    <text x="875" y="400" text-anchor="middle" font-size="28" fill="#9a4d16">クラスタリング</text>
+
+    <circle cx="600" cy="360" r="84" fill="#143a36" opacity="0.08" />
+    <text x="600" y="345" text-anchor="middle" font-size="28" font-weight="700" fill="#143a36">講義では</text>
+    <text x="600" y="390" text-anchor="middle" font-size="28" font-weight="700" fill="#143a36">両方を扱う</text>
+  </g>
+
+  <text x="600" y="635" text-anchor="middle" font-family="Hiragino Sans, Noto Sans JP, sans-serif" font-size="28" fill="#4d5d5a">テーマ3〜6: 教師あり学習 / テーマ7: 教師なし学習</text>
+</svg>

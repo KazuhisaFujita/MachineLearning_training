@@ -1,0 +1,36 @@
+<svg content='&lt;mxfile host="app.diagrams.net" modified="2026-04-02T00:00:00.000Z" agent="Codex" version="26.0.11" type="device"&gt;&lt;diagram id="supervised_unsupervised_map.drawio" name="Page-1"&gt;zVhLk9owDP41PnYmjhMnOTqQtJdOD3voOSVeyDTENJiF7a+vbJR36L4Y2D2wsiQb2d9nyYKwxfb0tc52m+8qlyVxnfxE2JK4LnUdB/4ZzfNZEzSKdV3k6NQpHoq/EpWN26HI5X7gqJUqdbEbKleqquRKD3RZXavj0O1RlcNv3WVrOVE8rLJyqv1Z5Hoz3pcxfJPFeqNH+9tmjTMq9pssV8eeiiWELWql9FnanhayNIfXnAvOI256waGNrZaVfuUcXWjYmnV6ysoD7pIkPhFLIjhJAhKnJAINJ2FEwtgIMSORTxJGQkpEQpLQeBqTT0Jw5tbkklAYTRQb//OW9XNzjlqeIMR4o7clKCiIe12r33KhSlWDplIVeMaPRVmOVFlZrCsYrmCTEvTxk6x1AQgJNGyLPC/tZFVpZJA53vMYQ6A4bhYnLqMeE4yDHo8DlpWniydLW8iA61Jtpa6fwQUnMI4njzR3vfPw2HHGC9Fl06OLh7oMabpuVx7ACAIiOY/q/rCbYury0hz5LxDWRjBIAoxRZFCKAcMYIQXo+gCOiIDLQAjdSs3S9VhjjngAPP9zUI3hy96CIyjfnc5z0NhFCISCAHwrCEMlcwj2E4I3gTHLvsAKEDMjIkIhaoTZfXW7OIfYhD2iaa0OVS5zJMxxU2j5sMtWxnqEBDdkcJ+swKfU/k2YDRY35dzvLE0i8WY4m9UrHFL3OtSkdEhN6jtTbrI5brrXIeeh+hg9hUAhCj4dPbucaAUIyQiOkd9B2P5O70rYSHhLyu9EWM7vTNharmcrJOAdJcjO2AGmYF4C1sLQcMIhwsOcY0qoR2JBwtCWUCDB4qroJUnKU/qGdMOG6NFwiJ5zpXQTDtFjzhQ9N5pBz9zlK4C3Kvez4AEMIaSNiAhqUETw/n8jb4Oim8ZzKHqCe5BtPgeK7dW6GYqHGRQtJCIdwuaSuBVak0AhZo3JuXbqpAl7Q+q8DWwBG10+z78pbPAUn4HNXhpTLKFmJw1s1BRFFNLLFbv3PPDs9bOFFVqOFvS2V4lp8+7j86+CEf4QOnSR8mXss/3u3Fo+FifDl4t11Oh/wDKFNucfOBe7nBERbtio+MDNQaMS8AlDKA+nDGmVH6TIo2l4pxwJDEfEguH7KVrwruL2C+2buxcbmZmO3xC8dt0Xnp337W9b2vQLxtJf+uI6NGkbU6QJp9P8H7gziYS96wkGw+6HEGvr/ZzEkn8=&lt;/diagram&gt;&lt;/mxfile&gt;' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fffaf4" />
+      <stop offset="100%" stop-color="#edf6f2" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="700" rx="36" fill="url(#bg3)" />
+  <text x="600" y="76" text-anchor="middle" font-family="Hiragino Sans, Noto Sans JP, sans-serif" font-size="38" font-weight="700" fill="#143a36">学習手法の見取り図</text>
+
+  <g font-family="Hiragino Sans, Noto Sans JP, sans-serif">
+    <rect x="110" y="150" width="430" height="420" rx="28" fill="#ffffff" stroke="#2f665f" stroke-width="5" />
+    <text x="325" y="212" text-anchor="middle" font-size="34" font-weight="700" fill="#2f665f">教師あり学習</text>
+    <text x="325" y="258" text-anchor="middle" font-size="25" fill="#143a36">入力 + 正解ラベルあり</text>
+
+    <rect x="180" y="300" width="290" height="92" rx="18" fill="#eef6f1" stroke="#2f665f" stroke-width="3" />
+    <text x="325" y="355" text-anchor="middle" font-size="28" fill="#2f665f">回帰: 数値を予測</text>
+
+    <rect x="180" y="420" width="290" height="92" rx="18" fill="#eef2fb" stroke="#4a6485" stroke-width="3" />
+    <text x="325" y="475" text-anchor="middle" font-size="28" fill="#4a6485">分類: ラベルを予測</text>
+
+    <rect x="660" y="150" width="430" height="420" rx="28" fill="#ffffff" stroke="#9a4d16" stroke-width="5" />
+    <text x="875" y="212" text-anchor="middle" font-size="34" font-weight="700" fill="#9a4d16">教師なし学習</text>
+    <text x="875" y="258" text-anchor="middle" font-size="25" fill="#143a36">入力のみ、正解ラベルなし</text>
+
+    <rect x="730" y="345" width="290" height="92" rx="18" fill="#fff1e3" stroke="#9a4d16" stroke-width="3" />
+    <text x="875" y="400" text-anchor="middle" font-size="28" fill="#9a4d16">クラスタリング</text>
+
+    <circle cx="600" cy="360" r="84" fill="#143a36" opacity="0.08" />
+    <text x="600" y="345" text-anchor="middle" font-size="28" font-weight="700" fill="#143a36">講義では</text>
+    <text x="600" y="390" text-anchor="middle" font-size="28" font-weight="700" fill="#143a36">両方を扱う</text>
+  </g>
+
+  <text x="600" y="635" text-anchor="middle" font-family="Hiragino Sans, Noto Sans JP, sans-serif" font-size="28" fill="#4d5d5a">テーマ3〜6: 教師あり学習 / テーマ7: 教師なし学習</text>
+</svg>
