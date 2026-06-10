@@ -118,22 +118,22 @@ style: |
 <div class="term-grid">
 <div class="term-col">
 <div class="term-item">1. 班分け、ガイダンス</div>
-<div class="term-item">2. テーマ1 講義</div>
-<div class="term-item">3. テーマ1 演習</div>
-<div class="term-item">4. テーマ2 講義</div>
-<div class="term-item">5. テーマ2 演習</div>
-<div class="term-item">6. テーマ3 講義</div>
-<div class="term-item">7. テーマ3 演習</div>
-<div class="term-item">8. テーマ4 講義</div>
+<div class="term-item">2. テーマ1 Python基礎・導入 講義</div>
+<div class="term-item">3. テーマ1 Python基礎・導入 演習</div>
+<div class="term-item">4. テーマ2 可視化とEDA 講義</div>
+<div class="term-item">5. テーマ2 可視化とEDA 演習</div>
+<div class="term-item">6. テーマ3 回帰分析の基礎 講義</div>
+<div class="term-item">7. テーマ3 回帰分析の基礎 演習</div>
+<div class="term-item">8. テーマ4 回帰モデル評価 講義</div>
 </div>
 <div class="term-col">
-<div class="term-item">9. テーマ4 演習</div>
-<div class="term-item">10. テーマ5 講義</div>
-<div class="term-item">11. テーマ5 演習</div>
-<div class="term-item">12. テーマ6 講義</div>
-<div class="term-item">13. テーマ6 演習</div>
-<div class="term-item">14. テーマ7 講義</div>
-<div class="term-item">15. テーマ7 演習</div>
+<div class="term-item">9. テーマ4 回帰モデル評価 演習</div>
+<div class="term-item">10. テーマ5 分類の基礎 講義</div>
+<div class="term-item">11. テーマ5 分類の基礎 演習</div>
+<div class="term-item">12. テーマ6 CNNによる画像分類 講義</div>
+<div class="term-item">13. テーマ6 CNNによる画像分類 演習</div>
+<div class="term-item">14. テーマ7 クラスタリング 講義</div>
+<div class="term-item">15. テーマ7 クラスタリング 演習</div>
 </div>
 </div>
 
