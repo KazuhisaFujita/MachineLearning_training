@@ -8,8 +8,9 @@
 
 - インターネットに接続できるPC
 - ブラウザ（Chrome など）
+- 充電器
+- Google Colab または Jupyter Notebook を使える環境
 - Python 3.10 以上
-- Jupyter Notebook を実行できる環境
 - `pip` と `venv` を使える状態
 
 最初に Python のバージョンを確認します。
@@ -18,7 +19,7 @@
 python --version
 ```
 
-## Google Colabolatory
+## Google Colab
 
 Google Colab を使う場合は、ブラウザだけで作業を始められます。次の手順で確認してください。
 
