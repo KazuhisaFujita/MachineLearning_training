@@ -1,275 +1,201 @@
 # 開発環境
 
-このノートブックでは、学習用の開発環境が正しく使えるかを確認します。必要なライブラリの有無や、実行方法の確認に使ってください。
+この資料では、授業で使う Python 実行環境を準備し、Notebook が動くことを確認します。初回はまず Google Colab を使えるようにし、必要なら手元の PC にローカル環境を用意してください。
 
-## 必要なもの
+## この回の目標
 
-学習を始める前に、次のものを用意してください。
+- Google Colab またはローカル Jupyter Notebook を起動できる
+- セルを実行して結果を確認できる
+- 今後の演習で使う基本ライブラリを準備できる
 
-- インターネットに接続できるPC
-- ブラウザ（Chrome など）
-- 充電器
-- Google Colab または Jupyter Notebook を使える環境
-- Python 3.10 以上
-- `pip` と `venv` を使える状態
+## 事前に用意するもの
 
-最初に Python のバージョンを確認します。
+- インターネット接続
+- ブラウザ
+- Google アカウント（Colab を使う場合）
+- 十分な空き容量のある PC（ローカル環境を使う場合）
 
-```bash
-python --version
-```
+## まずは Google Colab を使う
 
-## Google Colab
+授業をすぐ始めるだけなら、Google Colab が最も簡単です。ブラウザだけで Python を実行できます。
 
-Google Colab を使う場合は、ブラウザだけで作業を始められます。次の手順で確認してください。
+### Colab を開く手順
 
-1. Google アカウントでログインする。
-2. Colab を開いて「新しいノートブック」を作成する。
-3. 次のコードを実行して、セルの実行方法を確認する。
+1. [Google Colab](https://colab.research.google.com/?hl=ja) を開く。
+2. Google アカウントでログインする。
+3. 「新しいノートブック」を作成する。
+4. 最初のセルに次のコードを入力する。
 
 ```python
 print("Hello, Colab")
 ```
 
-4. 必要に応じて `pandas` や `scikit-learn` をインストールする。
+5. `Shift + Enter` で実行する。
+6. セルの下に `Hello, Colab` と表示されれば準備完了です。
 
-```python
-!pip install pandas scikit-learn
-```
+### Colab / Jupyter の基本操作
 
-## Jupyter Notebookの基本操作
+| 操作 | ショートカット | 説明 |
+|---|---|---|
+| セルを実行 | `Shift + Enter` | 現在のセルを実行する |
+| 保存 | `Cmd + S` / `Ctrl + S` | ノートブックを保存する |
+| コマンドモードへ戻る | `Esc` | セル操作のモードに切り替える |
+| 下にセルを追加 | `B` | コマンドモードで使う |
+| 上にセルを追加 | `A` | コマンドモードで使う |
+| セルを削除 | `dd` | コマンドモードで `d` を 2 回押す |
 
-Jupyter が起動するとブラウザでノートブックのリスト画面が表示されます。ここから実際にコードを書く方法をまとめます。
+### ノートブックでよく見る画面要素
 
-### ファイルの作成と保存
+- メニューバー: 保存、セル操作、ランタイム操作などを行う
+- ツールバー: 実行や追加など、よく使う操作をまとめた領域
+- セル: コードや説明文を入力する単位
+- 出力欄: 実行結果やエラーメッセージが表示される場所
 
-1. **新しいノートブックを作成する**
-   - 右上の「New」→「Python 3 (ipykernel)」または同様のオプションを選択する。
+## ローカル環境を使う場合
 
-2. **ファイル名を変更する**
-   - 上部の「Untitled」となっている部分をクリックして名前を入力する。例: `lesson01_intro.ipynb`
+長時間の実行、手元ファイルの利用、ネットワーク制限のある作業では、PC に Python と Jupyter を入れて開発する方が適しています。
 
-3. **ファイルを保存する**
-   - Jupyter は自動保存されますが、`Ctrl + S` (`Cmd + S`) で明示的に保存できます。
+ローカル環境では、まず仮想環境 `venv` を作成し、その中に必要なライブラリを入れます。
 
-### ノートブック編集画面
+### インストールするライブラリ
 
-ノートブックを開くと次のような構成になっています。
+この授業では、主に次のライブラリを使います。
 
-- **メニューバー**: ファイル操作・セル操作・カーネル管理など
-- **ツールバー**: よく使うボタンの並列表示
-- **セル**: コードやテキストを入力するブロック
-- **出力領域**: 各セルの実行結果
+- `jupyterlab`
+- `numpy`
+- `pandas`
+- `matplotlib`
+- `scikit-learn`
 
-### セルの種類と操作
+## Windows の場合
 
-Jupyter のセルには2つのタイプがあります。
+Windows では、WSL2 上に Python 環境を作る方法を推奨します。既に Python を直接使える環境がある場合は、その環境を使っても構いません。
 
-| ツール | Mac/Linux          | Windows           | 機能               |
-|--------|---------------------|--------------------|--------------------|
-| 再生   | `Shift + Enter`     | `Shift + Enter`    | セルを実行         |
-| コマンド   | `Esc`               | `Esc`              | モードに切り替え   |
-| 保存   | `Cmd + S`          | `Ctrl + S`        | 保存する           |
+### WSL2 の導入
 
-### ノートブックの操作
-
-1. **セルを追加する**
-   - 現在のセルを選択した状態で、メニューの「Insert」から、「Below」または「Above」を選ぶ。
-   - またはコマンドモードで `B` キーで下に、`A` キーで上に新しいセルを追加できます。
-
-2. **セルを削除する**
-   - メニューの Edit → Delete Cell を選択する。
-   - コマンドモードでも「dd」(dキーを2回) で削除可能。
-
-3. **セルをコピー・貼り付けする**
-   - コマンドモードで `c` でコピー、`v` でペースト。
-
-4. **セルの下に実行結果を表示する**
-   - `Shift + Enter` が一番確実な方法です。
-
-### カーネルの管理
-
-*カーネルは Python のエンジン部分です。*
-
-- **再起動:** 「Kernel」→「Restart」をクリックする。
-- **シャットダウン:** 「File」→「Close and Halt Notebook」を選択する。
-  - ノートブックを閉じ、そのノートブックのカーネルを終了します。
-
-5. **終了**
-   - Jupyter を使用した後は、ターミナルウィンドウで `Ctrl + C` を2回押してシャットダウンする。
-
-### ファイル管理リスト
-
-ファイルリスト画面に戻ると:
-- 各フォルダやディレクトリ名をクリックするだけで移動できます。
-- フォルダやファイルを右クリックすると削除/リネームなどの操作が可能です。
-
----
-
-## Windows
-
-Windows では、WSL2 を使う方法が扱いやすいです。まずはどちらの方法で進めるかを決めてください。
-
-### WSL2のインストール
-
-WSL2 を使うと、Windows 上でも Linux に近い環境で Python を扱えます。導入は次の流れで進めます。
-
-1. 管理者権限の PowerShell を開く。
+1. 管理者権限で PowerShell を開く。
 2. 次のコマンドを実行する。
 
 ```powershell
 wsl --install
 ```
 
-3. 再起動後、Ubuntu などの Linux ディストリビューションを起動する。
+3. 再起動後、Ubuntu などの Linux 環境を起動する。
 4. ユーザー名とパスワードを設定する。
-5. 次のコマンドで Python が使えるか確認する。
+5. Python が使えるか確認する。
 
 ```bash
 python3 --version
 ```
 
-6. 必要なら `sudo apt update` と `sudo apt install python3-pip python3-venv` を実行する。
-
-
-### jupyter notebookでプログラミング 
-
-Jupyter Notebook を使う場合は、仮想環境を作ってから起動します。次の順で試してください。
+6. 必要なら次を実行する。
 
 ```bash
-python -m venv .venv
-.venv\Scripts\activate
-python -m pip install --upgrade pip
-pip install jupyter pandas numpy matplotlib scikit-learn
+sudo apt update
+sudo apt install python3-pip python3-venv
+```
+
+### Windows で Jupyter を使う手順
+
+リポジトリをクローンしたフォルダの中で仮想環境を用意します。
+
+```bash
+cd MachineLearning_training
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install jupyter numpy pandas matplotlib scikit-learn
 jupyter notebook
 ```
 
-WSL2の場合、ブラウザが自動起動しないことがあります。その場合は以下の手順で手動で開きます。
+WSL2 ではブラウザが自動で開かないことがあります。その場合は、ターミナルに表示された URL を Windows 側のブラウザへ貼り付けてください。表示例は次のようになります。
 
-1. `jupyter notebook` を実行すると、ターミナル上に以下のようなメッセージが表示されます:
+```text
+http://localhost:8888/?token=xxxxxxxxxxxxxxx
+```
 
-   ```
-   http://localhost:8888/?token=xxxxxxxxxxxxxxx
-   ```
-
-2. Windows 側のブラウザを開き、上記の URL をそのままコピーしてアドレスバーに貼り付ける。
-
-> **注意**: WSL2内部で起動した Jupyter は、Windows 側から `localhost` でアクセスできますが、ポート番号とトークンを毎回確認する必要があります。ターミナルの出力を巻き戻さないようご注意ください。
-
-> **ブラウザが自動起動しない場合**  
-> ターミナルに `--no-browser` が指定されていたら削除するか、代わりに以下のコマンドを試してください:
-> ```bash
-> jupyter notebook --no-browser
-> ```
-
-起動後は、新しい Notebook を開いて次を実行します。
+起動後は新しい Notebook を作成し、次を実行して確認します。
 
 ```python
 print("Hello, Notebook")
 ```
 
-セルは `Shift + Enter` で実行し、結果が下に表示されることを確認してください。
+### Windows での確認コマンド
 
-### venvでプログラミング
-
-venv を使うと、プロジェクトごとに Python 環境を分けられます。Windows では次の手順で進めます。
-#### python venvのインストール
-
-まず、プロジェクト用のフォルダを作成してから仮想環境を作ります。
+仮想環境が有効な状態で、次を実行してください。
 
 ```bash
-mkdir ml_training
-cd ml_training
-python -m venv .venv
-```
-
-その後、仮想環境を有効化します。
-
-```powershell
-.venv\Scripts\activate
-```
-
-最後に、必要なライブラリを入れます。
-
-```bash
-python -m pip install --upgrade pip
-pip install jupyter pandas numpy matplotlib scikit-learn
-```
-
-#### venvの使い方
-
-venv を有効化したら、次のように環境を確認します。
-
-```bash
-where python
+which python
 python --version
+pip list
 ```
 
-`where python` で仮想環境の Python が先に表示されれば、正しく切り替わっています。作業が終わったら次のコマンドで終了します。
+作業終了後は次で仮想環境を抜けます。
 
-```powershell
+```bash
 deactivate
 ```
 
-## Mac
+## Mac の場合
 
-Mac では、ターミナルから `venv` と Jupyter Notebook を使う流れが基本です。
+Mac では、ターミナルから Python 仮想環境を作成し、その中で Jupyter Notebook を起動します。
 
-### jupyter notebookでプログラミング 
-
-Mac でも、仮想環境を作ってから Jupyter Notebook を起動します。
+### Mac で Jupyter を使う手順
 
 ```bash
-mkdir ml_training
-cd ml_training
+cd MachineLearning_training
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
-pip install jupyter pandas numpy matplotlib scikit-learn
+pip install --upgrade pip
+pip install jupyter numpy pandas matplotlib scikit-learn
 jupyter notebook
 ```
 
-Macの場合、`jupyter notebook`実行後、自動的にブラウザが起動しJupyterの画面が開きます。もし自動で開かない場合は、ターミナルに表示されたURL (例: `http://localhost:8888/?token=xxx`) をブラウザに貼り付けて手動でアクセスしてください。
+通常は `jupyter notebook` 実行後にブラウザが開きます。自動で開かない場合は、ターミナルに表示された URL をブラウザへ貼り付けてください。
 
-起動後は、新しい Notebook を作成して次を実行してください。
+起動後は新しい Notebook を作成し、次を実行してください。
 
 ```python
-print("Hello, Mac Notebook")
+print("Hello, Notebook")
 ```
 
-セルは `Shift + Enter` で実行し、結果が表示されることを確認します。
-
-### venvでプログラミング
-
-venv を使うと、プロジェクトごとに Python 環境を分けられます。Mac では次の流れで使います。
-#### python venvのインストール
-
-まず、仮想環境を作成します。
+### Mac での確認コマンド
 
 ```bash
-python3 -m venv .venv
-```
-
-次に有効化して、Python の場所を確認します。
-
-```bash
-source .venv/bin/activate
 which python
-```
-
-必要なライブラリは有効化した状態でインストールします。
-
-```bash
-python -m pip install --upgrade pip
-pip install jupyter pandas numpy matplotlib scikit-learn
-```
-
-#### venvの使い方
-
-有効化したあとは、毎回ターミナルを開いたら `source .venv/bin/activate` を実行します。作業中は `python` と `pip` が仮想環境のものを使っているかを確認してください。
-
-```bash
 python --version
 pip list
+```
+
+作業終了後は次を実行します。
+
+```bash
 deactivate
 ```
+
+## うまく動かないときの確認
+
+- `python --version` または `python3 --version` で Python が見つかるか
+- `which python` または `where python` で仮想環境の Python を使っているか
+- `pip install ...` 実行時にエラーが出ていないか
+- `jupyter notebook` 実行後に URL が表示されているか
+- Notebook のセルを実行したとき、エラーメッセージが出ていないか
+
+## 最低限の動作確認
+
+環境構築が終わったら、次の 3 点を確認してください。
+
+1. Python のバージョンが表示される。
+2. Notebook が開く。
+3. 次のコードが実行できる。
+
+```python
+import numpy as np
+import pandas as pd
+
+print("環境準備OK")
+print(np.array([1, 2, 3]).mean())
+print(pd.DataFrame({"a": [1, 2], "b": [3, 4]}))
+```
+
+上のコードが動けば、この授業の最初の演習を始める準備はできています。
