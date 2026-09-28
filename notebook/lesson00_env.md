@@ -104,8 +104,8 @@ cd MachineLearning_training
 python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
-pip install jupyter numpy pandas matplotlib scikit-learn
-jupyter notebook
+pip install jupyterlab numpy pandas matplotlib scikit-learn
+jupyter lab
 ```
 
 WSL2 ではブラウザが自動で開かないことがあります。その場合は、ターミナルに表示された URL を Windows 側のブラウザへ貼り付けてください。表示例は次のようになります。
@@ -138,7 +138,7 @@ deactivate
 
 ## Mac の場合
 
-Mac では、ターミナルから Python 仮想環境を作成し、その中で Jupyter Notebook を起動します。
+Mac は標準で Python 3 が使えるため、追加の Python インストールは不要です。ターミナルから Python 仮想環境を作成し、その中で Jupyter Notebook を起動します。
 
 ### Mac で Jupyter を使う手順
 
@@ -147,11 +147,11 @@ cd MachineLearning_training
 python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
-pip install jupyter numpy pandas matplotlib scikit-learn
-jupyter notebook
+pip install jupyterlab numpy pandas matplotlib scikit-learn
+jupyter lab
 ```
 
-通常は `jupyter notebook` 実行後にブラウザが開きます。自動で開かない場合は、ターミナルに表示された URL をブラウザへ貼り付けてください。
+通常は `jupyter lab` 実行後にブラウザが開きます。自動で開かない場合は、ターミナルに表示された URL をブラウザへ貼り付けてください。
 
 起動後は新しい Notebook を作成し、次を実行してください。
 
@@ -178,7 +178,7 @@ deactivate
 - `python --version` または `python3 --version` で Python が見つかるか
 - `which python` または `where python` で仮想環境の Python を使っているか
 - `pip install ...` 実行時にエラーが出ていないか
-- `jupyter notebook` 実行後に URL が表示されているか
+- `jupyter lab` 実行後に URL が表示されているか
 - Notebook のセルを実行したとき、エラーメッセージが出ていないか
 
 ## 最低限の動作確認
