@@ -221,3 +221,4 @@ __marimo__/
 *results*
 *artifacts*
 .venv
+.DS_Store
