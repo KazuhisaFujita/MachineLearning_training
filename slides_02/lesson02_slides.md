@@ -47,6 +47,15 @@ style: |
     align-items: center;
   }
   .array-example pre { margin: 16px 0; }
+  .frequency-tables {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+  }
+  section.frequency h1 { margin-bottom: 16px; }
+  section.frequency table { font-size: 24px; line-height: 1.2; width: 100%; }
+  section.frequency td, section.frequency th { padding: 5px 18px; }
+  section.frequency .small { font-size: 22px; }
 ---
 
 <!-- _class: cover -->
@@ -289,6 +298,107 @@ Aは5の近くに集まり、Bは広く散らばっています。
 
 ---
 
+# 度数分布表をコードで作る
+
+```python
+feature = 'petal length (cm)'
+n_bins = 18
+counts, bin_edges = np.histogram(df[feature], bins=n_bins)
+
+freq_df = pd.DataFrame({
+    '階級の下端': bin_edges[:-1],
+    '階級の上端': bin_edges[1:],
+    '度数': counts
+})
+display(freq_df)
+```
+
+`counts` は18個の件数、`bin_edges` は19個の境界値です。
+
+<p class="small">隣り合う境界値が、1つの階級の下端と上端になります。<br>次の表では、下端と上端を [a, b) の形にまとめて表示します。</p>
+
+<!-- NotebookのNumPy・pandas・Irisの準備セルを実行済みの状態で使う。
+np.histogramは集計を行い、この関数だけでは図を描かない。
+bin_edges[:-1]は最後を除いた18個、bin_edges[1:]は先頭を除いた18個で、
+対応する下端・上端の組になる。階級は下端以上・上端未満で、最後だけ上端を含む。
+ここでは境界の対応を見せるため、下端と上端を別の列にしている。
+Notebookでは同じ境界をinterval_labelsで文字列にまとめ、階級と度数の2列で表示する。
+集計には丸める前の境界値を用いる。 -->
+
+---
+
+<!-- _class: frequency -->
+
+# Irisの花びらの長さの度数分布表
+
+150件を18階級に分けると、次のようになります。
+
+<div class="frequency-tables">
+<div>
+
+| 階級（cm） | 度数（件） |
+| --- | ---: |
+| [1.000, 1.328) | 11 |
+| **[1.328, 1.656)** | **33** |
+| [1.656, 1.983) | 6 |
+| [1.983, 2.311) | 0 |
+| [2.311, 2.639) | 0 |
+| [2.639, 2.967) | 0 |
+| [2.967, 3.294) | 1 |
+| [3.294, 3.622) | 5 |
+| [3.622, 3.950) | 5 |
+
+</div>
+<div>
+
+| 階級（cm） | 度数（件） |
+| --- | ---: |
+| [3.950, 4.278) | 12 |
+| [4.278, 4.606) | 17 |
+| [4.606, 4.933) | 14 |
+| [4.933, 5.261) | 14 |
+| [5.261, 5.589) | 7 |
+| [5.589, 5.917) | 14 |
+| [5.917, 6.244) | 5 |
+| [6.244, 6.572) | 2 |
+| [6.572, 6.900] | 4 |
+
+</div>
+</div>
+
+<p class="small">[a, b) は「a以上、b未満」。最後の階級だけ右端も含みます。度数の合計は150件。<br>境界値は小数第3位までの表示です。集計には丸める前の値を使います。</p>
+
+<!-- 出典: scikit-learn同梱のIris、petal length (cm)。Notebookの度数分布表と同じ
+np.histogram(..., bins=18)で集計。読み順は左の表の上から下、次に右の表の上から下。
+次ページのヒストグラムと同じ階級。太字の階級の33件が、最も高い棒の高さに対応する。
+0件の区間も省略しない。表示境界を丸めて再集計すると結果が変わり得るため、
+集計境界と表示を区別する。 -->
+
+---
+
+# ヒストグラムを描くコード
+
+```python
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+plt.figure(figsize=(7, 4))
+sns.histplot(data=df, x=feature, bins=bin_edges, stat='count')
+plt.xlabel(feature)
+plt.ylabel('度数（件数）')
+plt.show()
+```
+
+`x` は測定項目、`bins` は度数分布表と同じ境界値です。
+
+**表で数えた件数が、そのまま棒の高さになります。**
+
+<!-- 前提: NumPy・pandas・Iris・度数分布表の準備済み。
+Notebook「ライブラリ読み込み」では日本語フォントや配色も設定する。
+以下のコード例はタイトル等を省略し、図の内容を決める処理を示す。 -->
+
+---
+
 <!-- _class: figure -->
 
 # 件数を高さにすると、ヒストグラムになる
@@ -319,6 +429,30 @@ Aは5の近くに集まり、Bは広く散らばっています。
 <!-- この段階では「階級を細かくしすぎるとどうなるか」の直前で止める。
 初回は間の「ライブラリ読み込み」を忘れず実行する。合計は150件。
 featureとbin_edgesを表と図で共有していることを確認する。 -->
+
+---
+
+# 階級数を変えて比べるコード
+
+```python
+values = df['petal length (cm)']
+fig, axes = plt.subplots(1, 2, figsize=(12, 4),
+                         sharex=True, sharey=True)
+for ax, n in zip(axes, [18, 180]):
+    ax.hist(values, bins=n, edgecolor='white', linewidth=0.5)
+    ax.set_title(f'{n}階級')
+    ax.set_xlabel('petal length (cm)')
+    ax.set_xlim(values.min(), values.max())
+axes[0].set_ylabel('件数')
+plt.tight_layout()
+plt.show()
+```
+
+`bins` の階級数を変え、**同じデータ・同じ軸の範囲**で比べます。
+
+<!-- Notebookの比較セルの要点を示す。今回は同じvaluesの最小最大で自動的に階級を作るため、
+明示的にrangeを渡したNotebookと境界は同じ。featureとbin_edgesは書き換えない。
+sharex/shareyで両図の軸を共有。 -->
 
 ---
 
@@ -367,6 +501,30 @@ featureとbin_edgesを表と図で共有していることを確認する。 -->
 
 ---
 
+# 種類ごとに色を分けるコード
+
+```python
+plt.figure(figsize=(7, 4))
+sns.histplot(
+    data=df, x=feature, hue='species',
+    bins=bin_edges, element='step', common_bins=True,
+    hue_order=species_order, palette=species_palette,
+    stat='count', multiple='layer', alpha=0.3
+)
+plt.xlabel(feature)
+plt.ylabel('件数')
+plt.show()
+```
+
+**`hue='species'`** で種類別に色分けします。
+同じ `bin_edges` を使い、全体の図と比べます。
+
+<!-- species_orderとspecies_paletteはNotebookのライブラリ読み込みセルで準備済み。
+element='step'は階段状の輪郭、multiple='layer'は積み上げずに重ねる指定。
+初期設定feature='petal length (cm)'、18階級の図が次ページ。 -->
+
+---
+
 <!-- _class: figure -->
 
 # 色分けすると、分布の重なりが見える
@@ -400,6 +558,33 @@ featureとbin_edgesを表と図で共有していることを確認する。 -->
 
 ---
 
+# 種類ごとの平均を棒グラフにするコード
+
+```python
+mean_by_species = (
+    df.groupby('species')[numeric_columns].mean()
+    .reindex(species_order)
+)
+x = np.arange(len(numeric_columns))
+plt.figure(figsize=(9, 5))
+for i, species in enumerate(species_order):
+    plt.bar(x + (i - 1) * 0.25, mean_by_species.loc[species],
+            width=0.25, label=species, color=species_palette[species])
+plt.xticks(x, numeric_columns, rotation=30, ha='right')
+plt.ylabel('平均値 (cm)')
+plt.legend(title='種類')
+plt.tight_layout()
+plt.show()
+```
+
+<p class="small"><code>groupby()</code> で種類ごとに集計し、横位置をずらして3種類の棒を並べます。</p>
+
+<!-- Notebookと同じ3種類の順序と配色。numeric_columnsはIrisの4測定項目。
+Notebookのoffset式を3種類に合わせて(i-1)*0.25と表記した。
+各列のmeanを求める流れを説明し、棒の横位置の計算の暗記は求めない。 -->
+
+---
+
 <!-- _class: figure -->
 
 # 種類ごとの平均を、棒の高さで比べる
@@ -411,6 +596,28 @@ featureとbin_edgesを表と図で共有していることを確認する。 -->
 <!-- 出典: lesson02 Notebook「棒グラフ」の保存済み出力。
 groupby('species')で種類に分けて平均。横軸は時間の順序ではない。
 4項目はcmだが測定対象が異なるため、同じ項目内で種類を比較する。 -->
+
+---
+
+# 件数を集計して、円グラフにするコード
+
+```python
+species_count = df['species'].value_counts().reindex(species_order)
+plt.figure(figsize=(6, 6))
+plt.pie(
+    species_count.values, labels=species_count.index,
+    autopct='%1.1f%%', startangle=90,
+    colors=[species_palette[s] for s in species_count.index]
+)
+plt.axis('equal')
+plt.show()
+```
+
+`value_counts()` で種類ごとの件数を数えます。
+`autopct` で、割合を小数第1位まで表示します。
+
+<!-- valuesが各扇形の元になる件数、indexがラベル。plt.pieが全件数に対する割合を計算する。
+種類の順番・色を他の図とそろえる。 -->
 
 ---
 
@@ -458,6 +665,30 @@ groupby('species')で種類に分けて平均。横軸は時間の順序では�
 1項目の分布では重なった種類も、見分けやすくなるでしょうか？
 
 <!-- Notebook「散布図で2つの測定項目を組み合わせる」。図を見る前に1点の意味を共有する。 -->
+
+---
+
+# 2つの列を、点の位置にするコード
+
+```python
+x_feature = 'petal length (cm)'
+y_feature = 'petal width (cm)'
+plt.figure(figsize=(7, 5))
+sns.scatterplot(
+    data=df, x=x_feature, y=y_feature,
+    hue='species', style='species',
+    hue_order=species_order, style_order=species_order,
+    palette=species_palette, s=70, alpha=0.8
+)
+plt.xlabel(x_feature)
+plt.ylabel(y_feature)
+plt.show()
+```
+
+**`x` と `y` が点の位置、`hue` と `style` が種類の区別。**
+
+<!-- Notebookの散布図セルと同じ測定項目・色・マーカー・点のサイズ・透明度。
+引数の列名と図の軸を対応させる。x_feature/y_featureの変更が実習の操作箇所。 -->
 
 ---
 
@@ -524,6 +755,35 @@ setosaは左下に離れて見える。versicolorとvirginicaには重なりが�
 <!-- 出典: ../notebook/data/monthly_mean_temperature_2025.csv と ../notebook/data/README.md。
 気象庁の各観測地点の月平均値。市全域の平均や平年値ではない。
 月平均気温は最高・最低気温の単純平均ではない。 -->
+
+---
+
+# CSVを読み込んで、折れ線を描くコード
+
+```python
+weather_df = pd.read_csv(
+    'data/monthly_mean_temperature_2025.csv', encoding='utf-8-sig'
+).sort_values('月')
+cities = ['広島', '津山', '金沢']
+colors = sns.color_palette('colorblind', 3)
+plt.figure(figsize=(8, 5))
+for city, color, marker in zip(cities, colors, ['o', 's', '^']):
+    plt.plot(weather_df['月'], weather_df[city],
+             label=city, color=color, marker=marker)
+plt.xlabel('月')
+plt.ylabel('月平均気温（℃）')
+plt.xticks(range(1, 13))
+plt.legend(title='地点')
+plt.tight_layout()
+plt.show()
+```
+
+<p class="small">Notebookフォルダで実行する例です。月の順に並べ、各地点の値を線で結びます。</p>
+
+<!-- CSVの配置: Notebookと同じ場所のdataフォルダ。
+リポジトリのルートで実行する場合のパス切り替えと存在確認はNotebookの完全なコードを参照。
+CSV読み込みのencodingはBOM対応。sort_valuesで時間の順序をそろえる。
+Colabのアップロード方法もNotebookを参照。 -->
 
 ---
 
