@@ -218,6 +218,7 @@ section.frequency .small { font-size: 22px; }
 <li>2つの項目を組み合わせると、何が分かるか</li>
 </ul>
 <p>最後に、気温のデータで「時間に沿った変化」も見ます。</p>
+<p>コードがよく分からなくても、機能とその役割を理解することを目指してください。</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="3" data-paginate="true" data-theme="default" data-lang="ja" data-style="section {
   font-family: &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, &quot;Yu Gothic&quot;, sans-serif;
@@ -428,7 +429,7 @@ section.frequency .small { font-size: 22px; }
 ;" data-marpit-pagination-total="44" data-size="16:9">
 <h1 id="%E8%AC%9B%E7%BE%A9%E3%81%A8%E5%AE%9F%E7%BF%92%E3%81%AE%E9%80%B2%E3%82%81%E6%96%B9">講義と実習の進め方</h1>
 <p>スライドで、問いと見るポイントを確認します。</p>
-<p>**「Notebookで実習」**が出たら、指定の見出しへ移ります。</p>
+<p><strong>「Notebookで実習」</strong> が出たら、指定の見出しへ移ります。</p>
 <p>実行したらスライドに戻り、分かったことを共有します。</p>
 <p class="small">Notebookは上から順に実行します。途中の説明やコードは、必要なときに読み返せます。コードをすべて覚える必要はありません。</p>
 </section>
@@ -4129,7 +4130,7 @@ section.frequency .small { font-size: 22px; }
 <li>広島・津山・金沢の各地点の月平均気温（℃）</li>
 </ul>
 <p><strong>時間の順に並ぶ値</strong>は、折れ線で結ぶと変化を追いやすくなります。</p>
-<p class="small">CSVをpandasで読み込みます。データはNotebookのdataフォルダにあります。</p>
+<p class="small">用意されたコードでCSVを読み込み、月ごとの気温を描きます。</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="37" data-paginate="true" data-theme="default" data-lang="ja" data-style="section {
   font-family: &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, &quot;Yu Gothic&quot;, sans-serif;
@@ -4231,9 +4232,7 @@ section.frequency td, section.frequency th { padding: 5px 18px; }
 section.frequency .small { font-size: 22px; }
 ;" data-marpit-pagination-total="44" data-size="16:9">
 <h1 id="csv%E3%82%92%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%93%E3%81%A7%E6%8A%98%E3%82%8C%E7%B7%9A%E3%82%92%E6%8F%8F%E3%81%8F%E3%82%B3%E3%83%BC%E3%83%89">CSVを読み込んで、折れ線を描くコード</h1>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python">weather_df = pd.read_csv(
-    <span class="hljs-string">&#x27;data/monthly_mean_temperature_2025.csv&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8-sig&#x27;</span>
-).sort_values(<span class="hljs-string">&#x27;月&#x27;</span>)
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python">weather_df = pd.read_csv(weather_csv, encoding=<span class="hljs-string">&#x27;utf-8-sig&#x27;</span>).sort_values(<span class="hljs-string">&#x27;月&#x27;</span>)
 cities = [<span class="hljs-string">&#x27;広島&#x27;</span>, <span class="hljs-string">&#x27;津山&#x27;</span>, <span class="hljs-string">&#x27;金沢&#x27;</span>]
 colors = sns.color_palette(<span class="hljs-string">&#x27;colorblind&#x27;</span>, <span class="hljs-number">3</span>)
 plt.figure(figsize=(<span class="hljs-number">8</span>, <span class="hljs-number">5</span>))
@@ -4247,7 +4246,7 @@ plt.legend(title=<span class="hljs-string">&#x27;地点&#x27;</span>)
 plt.tight_layout()
 plt.show()
 </code></pre>
-<p class="small">Notebookフォルダで実行する例です。月の順に並べ、各地点の値を線で結びます。</p>
+<p class="small">Notebookで準備したCSVを読み、月の順に各地点の値を線で結びます。</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="38" data-paginate="true" data-class="figure" data-theme="default" data-lang="ja" data-style="section {
   font-family: &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, &quot;Yu Gothic&quot;, sans-serif;
@@ -4807,21 +4806,21 @@ section.frequency .small { font-size: 22px; }
 </thead>
 <tbody>
 <tr>
-<td>A：配列とデータ確認</td>
-<td>配列のコード・出力、Irisの説明・件数・基本統計量</td>
+<td>A：ペンギン</td>
+<td>体重の度数分布表と比較図、階級数4・8・16の比較</td>
 </tr>
 <tr>
-<td>B：分布</td>
-<td>列名・階級数、コード・度数分布表・種類別ヒストグラム</td>
+<td>B：アイス購入額</td>
+<td>気温とアイスクリームの平均購入額の散布図</td>
 </tr>
 <tr>
-<td>C：関係</td>
-<td>軸と1点の意味、コード・散布図、図を根拠にした考察</td>
+<td>C：電力需要</td>
+<td>選んだ1日の折れ線グラフ、需要が最大の時刻と値</td>
 </tr>
 </tbody>
 </table>
-<p>必須の図は、<strong>種類別ヒストグラムと散布図の2図</strong>です。</p>
-<p class="small">Bでは分布と重なり、Cでは点の集まりと重なりを説明します。Cの考察はBとCの図を使い、事実・解釈・限界に分けます。</p>
+<p>必須の成果物は、<strong>度数分布表1つとグラフ3つ</strong>です。</p>
+<p class="small">AはAdelieと別の種類を比べ、階級数4・8・16も試して設定と理由を書きます。Cは日付を変更します。各演習で、図から読み取れることを2〜3文で説明します。</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="43" data-paginate="true" data-class="practice" data-theme="default" data-lang="ja" data-style="section {
   font-family: &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, &quot;Yu Gothic&quot;, sans-serif;
@@ -4926,8 +4925,8 @@ section.frequency .small { font-size: 22px; }
 <h2 id="%E3%81%BE%E3%81%A8%E3%82%81%E3%81%A8%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88">「まとめとレポート」</h2>
 <ul>
 <li>本文テンプレートを使い、Word形式でまとめる</li>
-<li>図や表は、選んだ列名・階級数・軸の設定とそろえる</li>
-<li>コードと結果に、自分の説明を添える</li>
+<li>Aの種類名・階級数、Cの日付を変えて再実行する</li>
+<li>度数分布表と3種類のグラフに、自分の説明を添える</li>
 <li>氏名・提出日と「分からなかった点」も記す</li>
 </ul>
 <p>提出方法と詳細は、Notebookで確認してください。</p>
@@ -5046,12 +5045,12 @@ section.frequency .small { font-size: 22px; }
 列の順番は数学・英語・理科。配列には数値だけが入り、科目名や学生名は入らない。
 右側の学生名は対応を示すコメントであり、配列のデータではない。</p></div><div class="bespoke-marp-note" data-index="5" tabindex="0"><p>shapeを見てから、結果が誰・何に対応するかを確認する。axisの番号の暗記だけにしない。</p></div><div class="bespoke-marp-note" data-index="6" tabindex="0"><p>開始:「NumPyで配列・行列を扱う」。終了:「配列全体への計算：ベクトル化」。
 実行の準備は前の見出しを参照。初回は値を変えずに実行し、対応を確認してから試す。
-演習Aに使うコードと出力を残す。</p></div><div class="bespoke-marp-note" data-index="7" tabindex="0"><p>実習の確認を受けて説明する。代入して scores = scores + 10 とすれば更新される。
+配列の操作は講義中の練習。課題A〜Cでは別のデータを使う。</p></div><div class="bespoke-marp-note" data-index="7" tabindex="0"><p>実習の確認を受けて説明する。代入して scores = scores + 10 とすれば更新される。
 ここからは数値に「何を測ったか」という意味を付けて扱う。</p></div><div class="bespoke-marp-note" data-index="8" tabindex="0"><p>出典: Notebook「Irisデータセットの中身」。がく片はsepal、花びらはpetal。
 Irisはscikit-learnに同梱。ここで自然界の全てのアヤメを代表すると解釈しない。</p></div><div class="bespoke-marp-note" data-index="9" tabindex="0"><p>targetとspeciesは同じ種類情報を別の形で表す。targetの平均に花の大きさの意味はない。
 インデックスは6列に含めない。</p></div><div class="bespoke-marp-note" data-index="10" tabindex="0"><p>実行セルは「ライブラリ読み込みとデータ準備」「データ確認」。
 基本統計量の全項目の説明はNotebookにある。まずmean/min/maxを読む。
-演習Aでは4特徴量から1列を選ぶ。ここで花びらの長さを使うのは講義用の例。</p></div><div class="bespoke-marp-note" data-index="11" tabindex="0"><p>Irisの実測値ではなく、平均と分布の違いを示す説明用データ。</p></div><div class="bespoke-marp-note" data-index="12" tabindex="0"><p>Notebook「度数分布表から分布を調べる」と同じ説明用データ。
+ここではIrisの1行・4特徴量の意味と基本統計量を確認する。課題Aはペンギンの体重分布。</p></div><div class="bespoke-marp-note" data-index="11" tabindex="0"><p>Irisの実測値ではなく、平均と分布の違いを示す説明用データ。</p></div><div class="bespoke-marp-note" data-index="12" tabindex="0"><p>Notebook「度数分布表から分布を調べる」と同じ説明用データ。
 階級数は区間の個数、階級幅は区間の幅。Iris全体の集計とは区別する。</p></div><div class="bespoke-marp-note" data-index="13" tabindex="0"><p>NotebookのNumPy・pandas・Irisの準備セルを実行済みの状態で使う。
 np.histogramは集計を行い、この関数だけでは図を描かない。
 bin_edges[:-1]は最後を除いた18個、bin_edges[1:]は先頭を除いた18個で、
@@ -5063,7 +5062,7 @@ np.histogram(..., bins=18)で集計。読み順は左の表の上から下、次
 次ページのヒストグラムと同じ階級。太字の階級の33件が、最も高い棒の高さに対応する。
 0件の区間も省略しない。表示境界を丸めて再集計すると結果が変わり得るため、
 集計境界と表示を区別する。</p></div><div class="bespoke-marp-note" data-index="15" tabindex="0"><p>前提: NumPy・pandas・Iris・度数分布表の準備済み。
-Notebook「ライブラリ読み込み」では日本語フォントや配色も設定する。
+Notebook「ライブラリ読み込み」ではjapanize-matplotlibによる日本語表示と配色も設定する。
 以下のコード例はタイトル等を省略し、図の内容を決める処理を示す。</p></div><div class="bespoke-marp-note" data-index="16" tabindex="0"><p>出典: lesson02 Notebook「シンプルなヒストグラム」の保存済み出力。
 花びらの長さ、18階級。等幅の階級なので棒の高さが件数に対応する。
 花びらが長いほど棒が高い、という意味ではない。</p></div><div class="bespoke-marp-note" data-index="17" tabindex="0"><p>この段階では「階級を細かくしすぎるとどうなるか」の直前で止める。
@@ -5073,13 +5072,13 @@ featureとbin_edgesを表と図で共有していることを確認する。</p>
 sharex/shareyで両図の軸を共有。</p></div><div class="bespoke-marp-note" data-index="19" tabindex="0"><p>出典: lesson02 Notebook「階級が細かすぎる例」の保存済み出力。
 両図のデータと軸範囲は同じ。階級数を増やすと幅が狭くなり各階級の件数も変わる。
 記録が0.1cm刻みであることも空の階級を生む。実際の花にその長さが存在しない証拠ではない。
-18階級が常に最適という主張はしない。</p></div><div class="bespoke-marp-note" data-index="20" tabindex="0"><p>comparison_binsは比較専用。演習Bのfeatureとbin_edgesはこのセルでは変わらない。
+18階級が常に最適という主張はしない。</p></div><div class="bespoke-marp-note" data-index="20" tabindex="0"><p>comparison_binsは比較専用。Irisのfeatureとbin_edgesはこのセルでは変わらない。
 実習後、値の集まる範囲と読み取りやすさを比較する。棒の高さの一致を求めない。</p></div><div class="bespoke-marp-note" data-index="21" tabindex="0"><p>次の図を出す前に予想してもらう。花びらの長さが今回の例。</p></div><div class="bespoke-marp-note" data-index="22" tabindex="0"><p>species_orderとspecies_paletteはNotebookのライブラリ読み込みセルで準備済み。
 element='step'は階段状の輪郭、multiple='layer'は積み上げずに重ねる指定。
 初期設定feature='petal length (cm)'、18階級の図が次ページ。</p></div><div class="bespoke-marp-note" data-index="23" tabindex="0"><p>出典: lesson02 Notebook「種類ごとのヒストグラム」の保存済み出力。
 花びらの長さ、18階級。同じ色の順序を以後の図でも保つ。
 積み上げではなく種類ごとの件数を重ねている。色の重なりは同じ階級に入る値があること。
-今回各種50件。総件数が異なるデータでは、件数差と分布の形を区別する必要がある。</p></div><div class="bespoke-marp-note" data-index="24" tabindex="0"><p>見出しは実ファイルの表記に合わせてある。演習Bに使う列名・n_bins・表・コード・図を残す。
+今回各種50件。総件数が異なるデータでは、件数差と分布の形を区別する必要がある。</p></div><div class="bespoke-marp-note" data-index="24" tabindex="0"><p>見出しは実ファイルの表記に合わせてある。Irisの分布を測定項目ごとに比べる練習。
 変数だけ変えて古い図と比べない。ライブラリ設定は初回実行済み。
 講義の次の棒グラフは初期データからの集計なのでfeature変更には依存しない。</p></div><div class="bespoke-marp-note" data-index="25" tabindex="0"><p>Notebookと同じ3種類の順序と配色。numeric_columnsはIrisの4測定項目。
 Notebookのoffset式を3種類に合わせて(i-1)*0.25と表記した。
@@ -5089,29 +5088,32 @@ groupby('species')で種類に分けて平均。横軸は時間の順序では�
 種類の順番・色を他の図とそろえる。</p></div><div class="bespoke-marp-note" data-index="28" tabindex="0"><p>出典: lesson02 Notebook「円グラフ」の保存済み出力。
 構成比の分母を確認する。丸めた表示の合計は100%ぴったりにならない場合がある。
 小さな差を正確に比較したいときは表や棒グラフも使う。</p></div><div class="bespoke-marp-note" data-index="29" tabindex="0"><p>答えの例: 棒グラフは種類ごとの平均差、円グラフはデータ内の構成比。
-ここまでの図は授業で確認する。レポート必須の2図と混同させない。</p></div><div class="bespoke-marp-note" data-index="30" tabindex="0"><p>Notebook「散布図で2つの測定項目を組み合わせる」。図を見る前に1点の意味を共有する。</p></div><div class="bespoke-marp-note" data-index="31" tabindex="0"><p>Notebookの散布図セルと同じ測定項目・色・マーカー・点のサイズ・透明度。
+ここまでのIrisの図は授業で確認する。課題では別のデータで3種類のグラフを作る。</p></div><div class="bespoke-marp-note" data-index="30" tabindex="0"><p>Notebook「散布図で2つの測定項目を組み合わせる」。図を見る前に1点の意味を共有する。</p></div><div class="bespoke-marp-note" data-index="31" tabindex="0"><p>Notebookの散布図セルと同じ測定項目・色・マーカー・点のサイズ・透明度。
 引数の列名と図の軸を対応させる。x_feature/y_featureの変更が実習の操作箇所。</p></div><div class="bespoke-marp-note" data-index="32" tabindex="0"><p>出典: lesson02 Notebook「散布図」の保存済み出力。
 setosaは左下に離れて見える。versicolorとvirginicaには重なりが残る。
 同じ座標では点が重なるので見える点数と件数は一致しない場合がある。
-全体の右上がりと、各種類の内部の関係の強さを区別する。因果関係はこの図だけでは言えない。</p></div><div class="bespoke-marp-note" data-index="33" tabindex="0"><p>演習Cに対応。演習Bと1項目を共通にすると比較しやすい。
-レポートに使う軸の列名と図が一致するよう再実行する。
+全体の右上がりと、各種類の内部の関係の強さを区別する。因果関係はこの図だけでは言えない。</p></div><div class="bespoke-marp-note" data-index="33" tabindex="0"><p>Irisを使った講義中の練習。ヒストグラムと1項目を共通にすると比較しやすい。
+軸の列名と表示結果が一致するよう再実行する。
 見た目の分離は、新しいデータに対する予測精度の保証ではない。</p></div><div class="bespoke-marp-note" data-index="34" tabindex="0"><p>初期設定の図についての例。学生は選んだ軸の図を根拠に書く。
-演習Cでは演習Bのヒストグラムも根拠に含める。この文の丸写しを求めない。</p></div><div class="bespoke-marp-note" data-index="35" tabindex="0"><p>出典: ../notebook/data/monthly_mean_temperature_2025.csv と ../notebook/data/README.md。
+課題でも自分の図に対応する説明を書く。この文の丸写しを求めない。</p></div><div class="bespoke-marp-note" data-index="35" tabindex="0"><p>出典: ../notebook/datasets/monthly_mean_temperature_2025.csv と ../notebook/datasets/README.md。
 気象庁の各観測地点の月平均値。市全域の平均や平年値ではない。
-月平均気温は最高・最低気温の単純平均ではない。</p></div><div class="bespoke-marp-note" data-index="36" tabindex="0"><p>CSVの配置: Notebookと同じ場所のdataフォルダ。
-リポジトリのルートで実行する場合のパス切り替えと存在確認はNotebookの完全なコードを参照。
-CSV読み込みのencodingはBOM対応。sort_valuesで時間の順序をそろえる。
-Colabのアップロード方法もNotebookを参照。</p></div><div class="bespoke-marp-note" data-index="37" tabindex="0"><p>出典: lesson02 Notebook「気象データの折れ線グラフ」の保存済み出力。
-一次出典と転記条件: ../notebook/data/README.md。各地点の2025年の月平均気温。
-問いへの回答を受講者に出してもらってから、Notebookの表で確認する。</p></div><div class="bespoke-marp-note" data-index="38" tabindex="0"><p>CSVの配置方法はNotebookに記載。Colabではdataフォルダにアップロードする。
+月平均気温は最高・最低気温の単純平均ではない。</p></div><div class="bespoke-marp-note" data-index="36" tabindex="0"><p>weather_csvはNotebookの読み込みセルで準備するパス。
+手元にCSVがなければ同じセルでGitHubから取得する。手動の配置・アップロードは不要。
+日本語フォントはNotebookのライブラリ読み込みセルでjapanize-matplotlibを設定する。
+CSV読み込みのencodingはBOM対応。sort_valuesで時間の順序をそろえる。</p></div><div class="bespoke-marp-note" data-index="37" tabindex="0"><p>出典: lesson02 Notebook「気象データの折れ線グラフ」の保存済み出力。
+一次出典と転記条件: ../notebook/datasets/README.md。各地点の2025年の月平均気温。
+問いへの回答を受講者に出してもらってから、Notebookの表で確認する。</p></div><div class="bespoke-marp-note" data-index="38" tabindex="0"><p>Notebookの読み込みセルは、CSVが手元になければGitHubから取得する。
 初期CSVでは3地点とも最高は7月、最低は2月。3地点の最大最小差は11月が最大3.7℃、
 6月が最小1.1℃。数値は必要に応じて表で確かめる。
 実習後、次ページでデータの粒度と期間の限界を共有する。</p></div><div class="bespoke-marp-note" data-index="39" tabindex="0"><p>Notebook「図の読み方」に対応。観測期間と集計単位を確かめる習慣につなげる。</p></div><div class="bespoke-marp-note" data-index="40" tabindex="0"><p>ここで講義冒頭の「花の種類による長さ・幅の違い」に戻り、分かったことを短く共有する。</p></div><div class="bespoke-marp-note" data-index="41" tabindex="0"><p>正式な要件はNotebook「まとめとレポート」「演習A〜C」を参照。
-A: scores.shapeとaxis=1/0のコード・出力と違い、Iris1行と4特徴量の意味、
-行列数・種ごとの件数、選んだ1列の平均/最小/最大。
-B: 度数分布表を作るコードと表、種類別ヒストグラムのコードと図。
-C: 散布図のコードと図、点の集まりと重なり、Bとの比較と事実/解釈/限界。
-棒・円・折れ線も授業中に実行するが、これらのレポート掲載は任意。</p></div><div class="bespoke-marp-note" data-index="42" tabindex="0"><p>本文構成: 学んだことの要約、演習の結果と説明、分からなかった点。
+A: ペンギンの体重。Adelieと別の種類を同じ階級・同じ軸で比べる。
+種類名、種類名を指定したコード1行、自動表示された度数分布表と比較図、説明を提出。
+階級数4・8・16を比較し、見やすいと思った設定と理由も必須。
+B: 2003〜2012年の気温とアイスクリームの平均購入額。コード・散布図・説明を提出。
+C: 2025年8月2〜31日から1日選ぶ。日付・変更後のコード・折れ線グラフ、
+需要が最大の時刻と値、1日の変化の説明を提出。
+各演習はimport・日本語フォント設定・CSV取得と読み込みを含み、単独で実行できる。
+講義中のNumPy・Iris・月平均気温の結果は、課題の必須成果物には含めない。</p></div><div class="bespoke-marp-note" data-index="42" tabindex="0"><p>本文構成: 学んだことの要約、演習の結果と説明、分からなかった点。
 提出先はNotebookに記載。締切はここで新たに設定しない。
 提出前には基本学習のコードを上から再実行し、設定と結果の一致を確認する。
 巻末の箱ひげ図、相関ヒートマップ、pairplot、IQR、レーダーチャートは任意の発展。</p></div><div class="bespoke-marp-note" data-index="43" tabindex="0"><p>最後に一人またはペアで短く説明する。初期設定の結論ではなく、本人の図に対応する説明を確認する。</p></div><script>/*!! License: https://unpkg.com/@marp-team/marp-cli@4.5.0/lib/bespoke.js.LICENSE.txt */
