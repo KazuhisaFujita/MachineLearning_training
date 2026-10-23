@@ -42,9 +42,9 @@
 - 元論文: Gorman KB, Williams TD, Fraser WR (2014). Ecological sexual dimorphism and environmental variability within a community of Antarctic penguins (genus Pygoscelis). [PLOS ONE, 9(3), e90081](https://doi.org/10.1371/journal.pone.0090081).
 
 
-# レンタサイクルと気象（演習候補）
+# レンタサイクルと気象（lesson03の演習）
 
-`seoul_bike.csv` は、UCI Machine Learning Repositoryの「Seoul Bike Sharing Demand」です。追加演習の候補として取得したもので、lesson02の必須課題には使用していません。
+`seoul_bike.csv` は、UCI Machine Learning Repositoryの「Seoul Bike Sharing Demand」です。lesson03の演習A〜Cで使用します。lesson02の必須課題には使用していません。
 
 - 期間・件数: 2017年12月1日〜2018年11月30日。1行が1時間、8,760行・14列。
 - 主な列: `Date`、`Hour`、`Rented Bike Count`（時間ごとの貸出件数）、`Temperature(°C)`（気温）、`Rainfall(mm)`（降水量）、`Seasons`、`Holiday`、`Functioning Day`。
@@ -53,7 +53,7 @@
 - 文字コード: UTF-8（BOM付き）。元CSVをCP1252として読み、文字コードのみ変更しています。列名・値・行の順序は変更していません。
 - `seoul_bike_source.zip` は取得したZIPそのものです。中の `SeoulBikeData.csv` の文字コードはCP1252です。
 - 読み込み例: `pd.read_csv('datasets/seoul_bike.csv')`（notebookディレクトリから実行）。
-- 演習例: 気温と貸出件数の散布図、時間帯別の平均貸出件数の棒グラフ。
+- lesson03では運用している日の18時だけを抽出し、気象と貸出件数の相関・単回帰・重回帰を調べます。学習期間は2017年12月〜2018年8月、テスト期間は2018年9〜11月です。学習期間全体の平均と、学習期間の同じ曜日の平均も比較します。
 - 取得日: 2026年10月20日。ライセンス: CC BY 4.0。
 
 出典: Seoul Bike Sharing Demand [Dataset]. (2020). UCI Machine Learning Repository. https://doi.org/10.24432/C5F62R.
