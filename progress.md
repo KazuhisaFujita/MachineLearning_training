@@ -4,7 +4,7 @@
 [x] 2. Python基礎
 [x] 3. EDA
 [x] 4. 回帰プレゼン
-[ ] 5. 回帰notebook
+[x] 5. 回帰notebook
 [x] 6. 分類プレゼン
 [ ] 7. 分類notebook
 [x] 8. ニューラルネットワークプレゼン
