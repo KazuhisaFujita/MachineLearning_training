@@ -1,0 +1,104 @@
+{
+  "train_n": 70,
+  "test_n": 30,
+  "models": {
+    "kNN（k=5）": {
+      "train_accuracy": 0.957,
+      "test_accuracy": 0.9,
+      "TP": 13,
+      "FP": 1,
+      "FN": 2,
+      "TN": 14,
+      "precision": 0.929,
+      "recall": 0.867,
+      "specificity": 0.933,
+      "false_positive_rate": 0.067
+    },
+    "フィッシャーの線形判別": {
+      "train_accuracy": 0.971,
+      "test_accuracy": 0.867,
+      "TP": 12,
+      "FP": 1,
+      "FN": 3,
+      "TN": 14,
+      "precision": 0.923,
+      "recall": 0.8,
+      "specificity": 0.933,
+      "false_positive_rate": 0.067
+    },
+    "ロジスティック回帰": {
+      "train_accuracy": 0.957,
+      "test_accuracy": 0.9,
+      "TP": 13,
+      "FP": 1,
+      "FN": 2,
+      "TN": 14,
+      "precision": 0.929,
+      "recall": 0.867,
+      "specificity": 0.933,
+      "false_positive_rate": 0.067
+    }
+  },
+  "new_flower": {
+    "petal_length_cm": 5.0,
+    "petal_width_cm": 1.7,
+    "knn_prediction": "virginica",
+    "lda_prediction": "virginica"
+  },
+  "lda": {
+    "w": [
+      2.52,
+      13.1
+    ],
+    "w0": -34.8,
+    "centers": {
+      "versicolor": {
+        "petal length (cm)": 4.28,
+        "petal width (cm)": 1.33
+      },
+      "virginica": {
+        "petal length (cm)": 5.56,
+        "petal width (cm)": 2.09
+      }
+    }
+  },
+  "logistic": {
+    "w": [
+      5.04,
+      10.79
+    ],
+    "w0": -42.69
+  },
+  "k_sweep": [
+    {
+      "k": 1,
+      "train_accuracy": 1.0,
+      "valid_accuracy": 0.952
+    },
+    {
+      "k": 3,
+      "train_accuracy": 0.98,
+      "valid_accuracy": 0.905
+    },
+    {
+      "k": 5,
+      "train_accuracy": 0.98,
+      "valid_accuracy": 0.905
+    },
+    {
+      "k": 11,
+      "train_accuracy": 0.98,
+      "valid_accuracy": 0.952
+    },
+    {
+      "k": 21,
+      "train_accuracy": 0.959,
+      "valid_accuracy": 0.905
+    },
+    {
+      "k": 47,
+      "train_accuracy": 0.918,
+      "valid_accuracy": 0.905
+    }
+  ]
+}
