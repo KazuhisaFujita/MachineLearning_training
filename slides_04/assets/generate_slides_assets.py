@@ -23,24 +23,40 @@ FIGURES = {
     11: ('knn_boundary.png', 176),
     14: ('k_boundaries.png', 140),
     15: ('k_accuracy.png', 220),
-    20: ('boundary_compare.png', 150),
-    25: ('test_compare.png', 150),
-    28: ('sigmoid.png', 190),
-    31: ('prob_map.png', 176),
+    20: ('lda_projection.png', 150),
+    22: ('boundary_compare.png', 150),
+    27: ('test_compare.png', 150),
+    30: ('sigmoid.png', 190),
+    33: ('prob_map.png', 150),
 }
 
 nb = json.loads(NOTEBOOK.read_text(encoding='utf-8'))
 ns = {}
+
+# ペンギンレポート節は X_train / X_test などをペンギンデータで上書きするため、
+# Irisの計算に使う名前をペンギン節の直前で退避する。
+IRIS_KEYS = ['X_train', 'X_test', 'y_train', 'y_test', 'feature_columns', 'class_names',
+             'knn_model', 'lda_model', 'logistic_model', 'centers',
+             'knn_new_label', 'lda_new_label', 'new_flower', 'k_results_df']
+iris_ns = None
+
 for i, cell in enumerate(nb['cells']):
     if cell['cell_type'] != 'code':
         continue
-    exec(compile(''.join(cell['source']), f'cell{i}', 'exec'), ns)
+    source = ''.join(cell['source'])
+    if iris_ns is None and 'penguins.csv' in source:
+        iris_ns = {key: ns[key] for key in IRIS_KEYS}
+    exec(compile(source, f'cell{i}', 'exec'), ns)
     if i in FIGURES:
         import matplotlib.pyplot as plt
         name, dpi = FIGURES[i]
         plt.gcf().savefig(ASSETS / name, dpi=dpi)
         plt.close('all')
         print('saved', name)
+
+if iris_ns is None:
+    raise RuntimeError('ペンギン節が見つかりません。ノートブック構成を確認してください。')
+ns = iris_ns
 
 import numpy as np
 from sklearn.metrics import confusion_matrix
