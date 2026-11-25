@@ -1,0 +1,397 @@
+{
+  "environment": {
+    "python": "3.13.5",
+    "torch": "2.10.0+cu130",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7",
+    "sklearn": "1.7.2",
+    "notebook": "notebook/lesson05_neural_network_basic_template.ipynb",
+    "note": "乱数シード42で再実行した結果。ノートブックの保存済み出力（PyTorch 2.14.1, macOS）と下表の数値はすべて一致した。環境違いで数値は変わることがある。"
+  },
+  "regression": {
+    "feature": "日最高気温の平均(℃)",
+    "target": "アイスクリームの平均購入額",
+    "n": {
+      "train": 72,
+      "valid": 24,
+      "test": 24
+    },
+    "periods": {
+      "train": "2003-2008",
+      "valid": "2009-2010",
+      "test": "2011-2012"
+    },
+    "architecture": [
+      1,
+      16,
+      16,
+      1
+    ],
+    "loss": "MSELoss（標準化した購入額）",
+    "optimizer": "Adam lr=0.01",
+    "epochs": 600,
+    "snapshot_epochs": [
+      0,
+      20,
+      100,
+      600
+    ],
+    "best_epoch": 481,
+    "best_valid_rmse": 84.8,
+    "rmse_at_snapshots": [
+      {
+        "epoch": 0,
+        "train_rmse": 263.4,
+        "valid_rmse": 322.4
+      },
+      {
+        "epoch": 20,
+        "train_rmse": 84.4,
+        "valid_rmse": 108.7
+      },
+      {
+        "epoch": 100,
+        "train_rmse": 74.5,
+        "valid_rmse": 88.5
+      },
+      {
+        "epoch": 600,
+        "train_rmse": 72.4,
+        "valid_rmse": 86.4
+      }
+    ],
+    "test": [
+      {
+        "model": "学習用の平均",
+        "MAE": 264.3,
+        "RMSE": 328.8
+      },
+      {
+        "model": "線形回帰（気温のみ）",
+        "MAE": 119.8,
+        "RMSE": 151.3
+      },
+      {
+        "model": "ニューラルネットワーク（気温のみ）",
+        "MAE": 73.2,
+        "RMSE": 85.6
+      }
+    ],
+    "prediction_at_25c": 680.4,
+    "linear_regression": {
+      "coef": 34.2,
+      "intercept": -111.3
+    },
+    "train_mean_target": 582.1,
+    "train_target_by_temperature": {
+      "15c_or_below": {
+        "n": 24,
+        "mean": 349.1,
+        "min": 268,
+        "max": 415
+      },
+      "above_15_to_20c": {
+        "n": 11,
+        "mean": 410.0,
+        "min": 315,
+        "max": 543
+      },
+      "above_25c": {
+        "n": 23,
+        "mean": 918.3,
+        "min": 653,
+        "max": 1279
+      }
+    },
+    "valid_rmse_from_best_epoch": {
+      "from_epoch": 481,
+      "min": 84.8,
+      "max": 87.0
+    },
+    "curve_prediction_yen": {
+      "10c": 324.8,
+      "15c": 368.1,
+      "25c": 680.4,
+      "30c": 1006.1
+    },
+    "curve_at_epoch0_yen": {
+      "min": 522.6,
+      "max": 574.4
+    },
+    "test_by_month": [
+      {
+        "month": "2011-01",
+        "actual": 346.0,
+        "predicted": 312.5
+      },
+      {
+        "month": "2011-02",
+        "actual": 289.0,
+        "predicted": 341.3
+      },
+      {
+        "month": "2011-03",
+        "actual": 329.0,
+        "predicted": 356.3
+      },
+      {
+        "month": "2011-04",
+        "actual": 462.0,
+        "predicted": 464.8
+      },
+      {
+        "month": "2011-05",
+        "actual": 672.0,
+        "predicted": 555.9
+      },
+      {
+        "month": "2011-06",
+        "actual": 791.0,
+        "predicted": 724.9
+      },
+      {
+        "month": "2011-07",
+        "actual": 1265.0,
+        "predicted": 1094.9
+      },
+      {
+        "month": "2011-08",
+        "actual": 1241.0,
+        "predicted": 1124.5
+      },
+      {
+        "month": "2011-09",
+        "actual": 767.0,
+        "predicted": 887.7
+      },
+      {
+        "month": "2011-10",
+        "actual": 516.0,
+        "predicted": 591.5
+      },
+      {
+        "month": "2011-11",
+        "actual": 393.0,
+        "predicted": 453.1
+      },
+      {
+        "month": "2011-12",
+        "actual": 423.0,
+        "predicted": 339.9
+      },
+      {
+        "month": "2012-01",
+        "actual": 339.0,
+        "predicted": 301.5
+      },
+      {
+        "month": "2012-02",
+        "actual": 274.0,
+        "predicted": 312.5
+      },
+      {
+        "month": "2012-03",
+        "actual": 385.0,
+        "predicted": 359.1
+      },
+      {
+        "month": "2012-04",
+        "actual": 524.0,
+        "predicted": 462.6
+      },
+      {
+        "month": "2012-05",
+        "actual": 671.0,
+        "predicted": 618.1
+      },
+      {
+        "month": "2012-06",
+        "actual": 798.0,
+        "predicted": 671.5
+      },
+      {
+        "month": "2012-07",
+        "actual": 1165.0,
+        "predicted": 1016.0
+      },
+      {
+        "month": "2012-08",
+        "actual": 1332.0,
+        "predicted": 1311.9
+      },
+      {
+        "month": "2012-09",
+        "actual": 849.0,
+        "predicted": 986.4
+      },
+      {
+        "month": "2012-10",
+        "actual": 515.0,
+        "predicted": 591.5
+      },
+      {
+        "month": "2012-11",
+        "actual": 326.0,
+        "predicted": 360.5
+      },
+      {
+        "month": "2012-12",
+        "actual": 414.0,
+        "predicted": 341.3
+      }
+    ],
+    "test_months_predicted_below_actual": 14
+  },
+  "classification": {
+    "features": [
+      "petal length (cm)",
+      "petal width (cm)"
+    ],
+    "classes": [
+      "setosa",
+      "versicolor",
+      "virginica"
+    ],
+    "n": {
+      "train": 90,
+      "valid": 30,
+      "test": 30
+    },
+    "class_counts": {
+      "train": {
+        "setosa": 30,
+        "versicolor": 30,
+        "virginica": 30
+      },
+      "valid": {
+        "setosa": 10,
+        "versicolor": 10,
+        "virginica": 10
+      },
+      "test": {
+        "setosa": 10,
+        "versicolor": 10,
+        "virginica": 10
+      }
+    },
+    "architecture": [
+      2,
+      16,
+      16,
+      3
+    ],
+    "loss": "CrossEntropyLoss（3クラスのスコア）",
+    "optimizer": "Adam lr=0.02",
+    "epochs": 200,
+    "snapshot_epochs": [
+      0,
+      10,
+      50,
+      200
+    ],
+    "best_epoch": 22,
+    "best_valid_loss": 0.155,
+    "at_snapshots": [
+      {
+        "epoch": 0,
+        "train_loss": 1.103,
+        "valid_loss": 1.103,
+        "train_accuracy": 0.333,
+        "valid_accuracy": 0.333
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.379,
+        "valid_loss": 0.392,
+        "train_accuracy": 0.856,
+        "valid_accuracy": 0.8
+      },
+      {
+        "epoch": 50,
+        "train_loss": 0.039,
+        "valid_loss": 0.246,
+        "train_accuracy": 0.978,
+        "valid_accuracy": 0.933
+      },
+      {
+        "epoch": 200,
+        "train_loss": 0.038,
+        "valid_loss": 0.214,
+        "train_accuracy": 0.978,
+        "valid_accuracy": 0.933
+      }
+    ],
+    "valid_accuracy_at_best_epoch": 0.933,
+    "valid_loss_from_best_epoch": {
+      "from_epoch": 22,
+      "min": 0.155,
+      "max": 0.25
+    },
+    "valid_predictions_at_epoch0": {
+      "virginica": 30
+    },
+    "grid_class_share_at_snapshots": {
+      "0": {
+        "setosa": 0.0,
+        "versicolor": 0.0,
+        "virginica": 1.0
+      },
+      "10": {
+        "setosa": 0.4,
+        "versicolor": 0.214,
+        "virginica": 0.386
+      },
+      "50": {
+        "setosa": 0.21,
+        "versicolor": 0.502,
+        "virginica": 0.287
+      },
+      "200": {
+        "setosa": 0.184,
+        "versicolor": 0.527,
+        "virginica": 0.288
+      }
+    },
+    "valid_accuracy_max": {
+      "epoch": 17,
+      "accuracy": 0.967
+    },
+    "test": {
+      "accuracy": 0.933,
+      "correct": 28,
+      "total": 30,
+      "one_flower_points": 3.3,
+      "misclassified": [
+        {
+          "petal_length": 5.6,
+          "petal_width": 1.4,
+          "actual": "virginica",
+          "predicted": "versicolor"
+        },
+        {
+          "petal_length": 5.0,
+          "petal_width": 1.7,
+          "actual": "versicolor",
+          "predicted": "virginica"
+        }
+      ]
+    },
+    "new_flower": {
+      "petal_length": 5.0,
+      "petal_width": 1.7,
+      "predicted": "virginica",
+      "probabilities": {
+        "setosa": 1.6488609617226757e-05,
+        "versicolor": 0.2914333939552307,
+        "virginica": 0.7085501551628113
+      },
+      "same_position_in_test": [
+        {
+          "actual": "versicolor",
+          "correct": false
+        }
+      ]
+    }
+  }
+}
