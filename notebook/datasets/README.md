@@ -232,3 +232,13 @@ test = analysis_data[analysis_data['日時'] >= '2025-01-01'].copy()
 - 同[品目分類（2020年改定）（総数：金額）](https://www.e-stat.go.jp/dbview?sid=0003343671)。東京都区部の2015〜2024年を抽出。
 - 同[品目分類（2020年改定）（総数：数量）](https://www.e-stat.go.jp/dbview?sid=0003343670)。全国の2015〜2024年を抽出。ビールの単位は原表の「1l」をLと表記。
 - 気象庁[過去の気象データ・ダウンロード](https://www.data.jma.go.jp/risk/obsdl/index.php)、東京、月別値、2015〜2025年。
+
+# 紙幣の真贋判定（Banknote Authentication）
+
+`banknote_authentication.csv` は、紙幣を模した真正・偽造の試料画像から得た特徴量を収録したlesson04の課題用データです。UCIの配布ファイルに列名を付け、拡張子を `.csv` にしました。1,372件の値と行順は原資料のままです。
+
+- `variance`、`skewness`、`kurtosis`、`entropy` は、ウェーブレット変換した画像の分散、歪度、尖度、エントロピーです。
+- `class` は真贋ラベルです。0が真正（762件）、1が偽造（610件）です。
+- lesson04では `variance` と `skewness` を使い、同じ2特徴量とラベルを持つ重複行24件を実行時に除いてから学習用とテスト用に分けます。
+
+出典は Volker Lohweg (2012), *Banknote Authentication*, UCI Machine Learning Repository（[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)）です。[データセット](https://doi.org/10.24432/C55P57)・[元データ](https://archive.ics.uci.edu/ml/machine-learning-databases/00267/data_banknote_authentication.txt)・[ラベルの対応に関する著者の回答](https://jamesmccaffreyblog.com/2020/08/18/in-the-banknote-authentication-dataset-class-0-is-genuine-authentic/)
