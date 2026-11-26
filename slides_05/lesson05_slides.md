@@ -180,7 +180,7 @@ nn.Linear(16, 1)   # 16個 → 購入額1個
 
 <div class="caption">講義資料2の活性化関数の一覧のうち、今回は<strong>ReLU</strong>を使います。資料1のパーセプトロンがステップ関数（0か1）だったのに対し、ReLUは正の値を大きさそのままに通します。</div>
 
-<!-- 資料2「現在はReLUを使う」: 特別な考えがなければReLU、より深いネットワークを効率的に学習できる、と説明されている。シグモイドはlesson04のロジスティック回帰で既に使っている。 -->
+<!-- 資料2「現在はReLUを使う」: 特別な考えがなければReLU、より深いネットワークを効率的に学習できる、と説明されている。シグモイドはlesson04のロジスティック回帰で既に使っている。ReLUをSigmoid・tanhに差し替えた比較実験はスライド45〜48（Notebook 5節）にある。 -->
 
 ---
 
@@ -702,6 +702,56 @@ for epoch in range(cls_epochs + 1):        # 0〜200
 
 ---
 
+<!-- _class: figure -->
+
+# 発展: 活性化関数を変えてみる
+
+![h:370](assets/ext_activation_shapes.png)
+
+<div class="caption">本文では回帰・分類とも<strong>ReLU</strong>を使いましたが、資料が紹介する活性化関数にはシグモイドもあり、tanhはシグモイドに似た形で出力が-1〜1になります。どちらも端が平らになる<strong>飽和</strong>を持ちます。この発展では<strong>活性化関数だけ</strong>を差し替え、層の構成・学習率・エポック数・「検証用で一番よかった重みを選ぶ」ルール・乱数シード42まで本文のまま実行します。初期値は同じ乱数列から引くので、<strong>3つのモデルの違いは活性化関数だけ</strong>です。</div>
+
+<!-- Notebook 5節。数値は metrics.json の activation_extension.seed42 と identity_check。発展のReLU行は本文の再実行になり、回帰 検証RMSE最小84.8円（epoch 481）・テスト85.6円、分類 epoch 22・テスト28/30輪が本文と一致する（identity_check relu_reg_curve_max_abs_diff_yen=0.0）。「本文と一致することが、他を変えていない証拠」の実習になる。 -->
+
+---
+
+<!-- _class: figure -->
+
+# 発展（回帰）: 活性化関数だけ変えた結果
+
+![h:380](assets/ext_reg_compare.png)
+
+<div class="caption">検証RMSEの最小は3つでそれぞれ <strong>ReLU 84.8円（epoch 481）、tanh 83.6円（epoch 600）、Sigmoid 90.2円（epoch 600）</strong>。3つとも直線を曲げ、低温で緩やか・高温で急な増え方になります（25→30℃: ReLU 326円、Sigmoid 347円、tanh 387円）。Sigmoidは下がり始めるのも遅く、最小が最後のエポックで、<strong>600エポック時点ではまだ学び途中</strong>です。</div>
+
+<!-- 数値は metrics.json の activation_extension.seed42（reg_best_*、reg_slope_25_to_30c）と seed_sweep。tanhの最小もepoch 600で、3つとも同じエポック数で比べた値。5シードではtanhが検証RMSE最小なのは2/5シード、選択エポックは600が4/5。600エポックでの誤差差は主に「速さ」: エポックを2000に延ばした追加実行（シード42、metrics の activation_extension.longer_budget_probe）ではSigmoidの検証RMSEが1000エポックまでに83円台まで下がり、ReLU・tanh（83〜87円で揺らぐ）と同じ水準になる。600エポック以降の順は安定せず、誤差の差そのものは活性化関数の性質ではなく「600エポックでそろえた比較」の結果として扱う。 -->
+
+---
+
+<!-- _class: figure -->
+
+# 発展（分類）: 検証損失と正解率
+
+![h:400](assets/ext_cls_compare.png)
+
+<div class="caption">検証損失の最小は3つでそれぞれ <strong>Sigmoid 0.142（epoch 68）、tanh 0.141（epoch 23）、ReLU 0.155（epoch 22）</strong>で、Sigmoidは収束まで時間がかかります。<strong>検証正解率は3つとも最終的に93.3%</strong>で、損失の差は正解率にそのままは表れません。スライド34の「正解率と損失は別のもの」は、活性化関数を変えても成り立ちます。</div>
+
+<!-- 数値は metrics.json の activation_extension.seed42（cls_best_*、cls_valid_accuracy_final / cls_valid_accuracy_at_selected はいずれも0.933）。分類の選択エポックは5シードでも傾向が同じで、ReLU 22〜41・tanh 19〜23に対しSigmoidは67〜74と一貫して遅い（activation_extension.seed_sweep.cls_best_epochs）。 -->
+
+---
+
+<!-- _class: figure -->
+
+# 発展: 結果はどれだけ違うか
+
+- 識別領域の形は3つともほぼ同じで、3つとも花弁の長さ5.0cm・幅1.7cmの同じ花を間違えました。ReLUだけもう1輪多く、テストは **28/30、29/30、29/30輪**（ReLU・Sigmoid・tanh）です。領域の図はNotebook 5節にあります
+- シード5通りのテストRMSE範囲は **ReLU 82.9〜85.6円、tanh 83.9〜86.8円、Sigmoid 91.8〜93.2円** です
+- **ReLUとtanhの差は、1シード（重みの初期値）のばらつきと同じ程度**で、順位も入れ替わります。「一番良い活性化関数」は結論しません。Sigmoidの誤差が大きいのは、エポック数を600でそろえた条件での速さの差です（46枚目）
+
+<!-- 数値は metrics.json の activation_extension.seed42（誤分類・テスト正解）と seed_sweep（reg_test_rmse_by_seed / reg_sigmoid_gap_to_second_by_seed / reg_order_swaps_relu_tanh）。シードが変わるのは重みの初期値だけで、データの分け方は本文の random_state=42 のまま（分け方のばらつきは別の話）。Sigmoidが最大は600エポックでそろえた全シードで一貫したが、エポックを延ばすと同じ水準になる（longer_budget_probe・46枚目）。 -->
+
+<!-- 数値は metrics.json の activation_extension.seed42（誤分類の内訳）と seed_sweep（範囲・選択エポック）。実践でReLUがよく使われる理由（資料2「現在はReLUを使う」）は、この小さな比較から出る結論ではなく、大きなネットワークを速く安定して学習しやすいこと。シグモイドの「遅さ」（飽和で勾配が小さくなる）はその一端で、今回の曲線に現れている。留保: 学習率は本文の値（回帰0.01・分類0.02）のままで、活性化関数ごとに再調整はしていない。 -->
+
+---
+
 # まとめ — 今日の5つの道具
 
 1. **LinearとReLU:** 重み付きの足し算と、負を0にする変換。これを重ねることで、**直線に限定されない**関係を表せます
@@ -721,7 +771,7 @@ for epoch in range(cls_epochs + 1):        # 0〜200
 3. **共通点と違い:** 何が共通で、最後の出力と損失をどう変えたか
 4. **学習曲線の解釈:** 学習用と検証用の変化、選んだエポックと最後のエポック
 
-<div class="small">発展（任意）: エポック数・隠れ層の大きさ・学習率のうち<strong>1つだけ</strong>変え、検証用の曲線で比較します。テスト結果を見ながらの調整は避けてください。</div>
+<div class="small">発展（任意）: エポック数・隠れ層の大きさ・学習率・活性化関数のうち<strong>1つだけ</strong>変え、検証用の曲線で比較します。活性化関数を1つだけ変えた見本はスライド45〜48とNotebook 5節にあります。テスト結果を見ながらの調整は避けてください。</div>
 
 次回はCNNです。今日の「全部つながった層」を、**画像の局所に限定した層**に置き換えます。
 

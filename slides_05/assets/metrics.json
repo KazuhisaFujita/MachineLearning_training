@@ -393,5 +393,326 @@
         }
       ]
     }
+  },
+  "activation_extension": {
+    "note": "nn.Sequentialの活性化関数だけをReLU/Sigmoid/Tanhに差し替えた比較。層構成・学習率・エポック数・検証用による重み選び・テストの使い方はすべて本文と同じ。同じシードでは同じ初期値から始まる。スライド45〜48の数値はここから取る。",
+    "seeds": [
+      42,
+      0,
+      1,
+      2,
+      3
+    ],
+    "seed42": {
+      "ReLU": {
+        "reg_valid_rmse_epoch0": 322.4,
+        "reg_best_epoch": 481,
+        "reg_best_valid_rmse": 84.8,
+        "reg_test_rmse": 85.6,
+        "reg_prediction_at_25c": 680.4,
+        "reg_slope_10_to_15c": 43.3,
+        "reg_slope_25_to_30c": 325.7,
+        "cls_best_epoch": 22,
+        "cls_best_valid_loss": 0.155,
+        "cls_valid_accuracy_at_selected": 0.933,
+        "cls_valid_accuracy_final": 0.933,
+        "cls_test_correct": 28,
+        "cls_test_total": 30,
+        "cls_misclassified": [
+          {
+            "petal_length": 5.6,
+            "petal_width": 1.4,
+            "actual": "virginica",
+            "predicted": "versicolor"
+          },
+          {
+            "petal_length": 5.0,
+            "petal_width": 1.7,
+            "actual": "versicolor",
+            "predicted": "virginica"
+          }
+        ]
+      },
+      "Sigmoid": {
+        "reg_valid_rmse_epoch0": 321.1,
+        "reg_best_epoch": 600,
+        "reg_best_valid_rmse": 90.2,
+        "reg_test_rmse": 91.8,
+        "reg_prediction_at_25c": 659.5,
+        "reg_slope_10_to_15c": 49.5,
+        "reg_slope_25_to_30c": 347.0,
+        "cls_best_epoch": 68,
+        "cls_best_valid_loss": 0.142,
+        "cls_valid_accuracy_at_selected": 0.933,
+        "cls_valid_accuracy_final": 0.933,
+        "cls_test_correct": 29,
+        "cls_test_total": 30,
+        "cls_misclassified": [
+          {
+            "petal_length": 5.0,
+            "petal_width": 1.7,
+            "actual": "versicolor",
+            "predicted": "virginica"
+          }
+        ]
+      },
+      "Tanh": {
+        "reg_valid_rmse_epoch0": 321.4,
+        "reg_best_epoch": 600,
+        "reg_best_valid_rmse": 83.6,
+        "reg_test_rmse": 86.6,
+        "reg_prediction_at_25c": 736.6,
+        "reg_slope_10_to_15c": 53.3,
+        "reg_slope_25_to_30c": 387.1,
+        "cls_best_epoch": 23,
+        "cls_best_valid_loss": 0.141,
+        "cls_valid_accuracy_at_selected": 0.933,
+        "cls_valid_accuracy_final": 0.933,
+        "cls_test_correct": 29,
+        "cls_test_total": 30,
+        "cls_misclassified": [
+          {
+            "petal_length": 5.0,
+            "petal_width": 1.7,
+            "actual": "versicolor",
+            "predicted": "virginica"
+          }
+        ]
+      }
+    },
+    "identity_check": {
+      "relu_reg_best_epoch": true,
+      "relu_reg_best_valid_rmse": true,
+      "relu_reg_curve_max_abs_diff_yen": 0.0,
+      "relu_cls_best_epoch": true,
+      "relu_cls_best_valid_loss": true,
+      "relu_cls_test_correct": true
+    },
+    "seed_sweep": {
+      "ReLU": {
+        "reg_test_rmse_min": 82.9,
+        "reg_test_rmse_max": 85.6,
+        "reg_test_rmse_by_seed": {
+          "42": 85.6,
+          "0": 83.5,
+          "1": 84.8,
+          "2": 82.9,
+          "3": 83.6
+        },
+        "cls_test_correct_min": 28,
+        "cls_test_correct_max": 28,
+        "cls_test_correct_by_seed": {
+          "42": 28,
+          "0": 28,
+          "1": 28,
+          "2": 28,
+          "3": 28
+        },
+        "reg_best_epochs": [
+          481,
+          589,
+          517,
+          508,
+          589
+        ],
+        "cls_best_epochs": [
+          22,
+          29,
+          26,
+          31,
+          41
+        ]
+      },
+      "Sigmoid": {
+        "reg_test_rmse_min": 91.8,
+        "reg_test_rmse_max": 93.2,
+        "reg_test_rmse_by_seed": {
+          "42": 91.8,
+          "0": 92.3,
+          "1": 92.5,
+          "2": 93.2,
+          "3": 91.9
+        },
+        "cls_test_correct_min": 28,
+        "cls_test_correct_max": 29,
+        "cls_test_correct_by_seed": {
+          "42": 29,
+          "0": 29,
+          "1": 29,
+          "2": 28,
+          "3": 28
+        },
+        "reg_best_epochs": [
+          600,
+          600,
+          600,
+          600,
+          600
+        ],
+        "cls_best_epochs": [
+          68,
+          74,
+          68,
+          67,
+          74
+        ]
+      },
+      "Tanh": {
+        "reg_test_rmse_min": 83.9,
+        "reg_test_rmse_max": 86.8,
+        "reg_test_rmse_by_seed": {
+          "42": 86.6,
+          "0": 85.4,
+          "1": 83.9,
+          "2": 84.0,
+          "3": 86.8
+        },
+        "cls_test_correct_min": 28,
+        "cls_test_correct_max": 29,
+        "cls_test_correct_by_seed": {
+          "42": 29,
+          "0": 28,
+          "1": 28,
+          "2": 28,
+          "3": 28
+        },
+        "reg_best_epochs": [
+          600,
+          520,
+          600,
+          600,
+          600
+        ],
+        "cls_best_epochs": [
+          23,
+          23,
+          20,
+          23,
+          19
+        ]
+      },
+      "reg_sigmoid_gap_to_second_by_seed": {
+        "0": 6.9,
+        "1": 7.7,
+        "2": 9.2,
+        "3": 5.1,
+        "42": 5.2
+      },
+      "reg_order_swaps_relu_tanh": [
+        [
+          "0",
+          "ReLU"
+        ],
+        [
+          "1",
+          "Tanh"
+        ],
+        [
+          "2",
+          "ReLU"
+        ],
+        [
+          "3",
+          "ReLU"
+        ],
+        [
+          "42",
+          "ReLU"
+        ]
+      ]
+    },
+    "longer_budget_probe": {
+      "protocol": "シード42・回帰・学習率0.01は本文と同じ。エポック数だけを2000に延ばし、100エポックごとに検証RMSEを測る追加実行（Notebook本文にはない）",
+      "per_activation": {
+        "ReLU": {
+          "valid_rmse_every_100_epochs": {
+            "0": 322.4,
+            "100": 88.5,
+            "200": 85.7,
+            "300": 86.2,
+            "400": 86.4,
+            "500": 85.9,
+            "600": 86.4,
+            "700": 86.6,
+            "800": 86.5,
+            "900": 86.2,
+            "1000": 86.1,
+            "1100": 87.0,
+            "1200": 90.7,
+            "1300": 87.9,
+            "1400": 85.5,
+            "1500": 87.6,
+            "1600": 92.1,
+            "1700": 85.5,
+            "1800": 89.1,
+            "1900": 89.3,
+            "2000": 87.2
+          },
+          "best_over_evaluated_epochs": 85.5,
+          "best_over_evaluated_epoch": 1400
+        },
+        "Sigmoid": {
+          "valid_rmse_every_100_epochs": {
+            "0": 321.1,
+            "100": 105.0,
+            "200": 93.8,
+            "300": 91.9,
+            "400": 90.9,
+            "500": 90.5,
+            "600": 90.2,
+            "700": 89.1,
+            "800": 87.1,
+            "900": 84.8,
+            "1000": 83.5,
+            "1100": 83.3,
+            "1200": 83.2,
+            "1300": 83.4,
+            "1400": 83.3,
+            "1500": 83.2,
+            "1600": 83.1,
+            "1700": 83.2,
+            "1800": 83.2,
+            "1900": 83.3,
+            "2000": 83.3
+          },
+          "best_over_evaluated_epochs": 83.1,
+          "best_over_evaluated_epoch": 1600
+        },
+        "Tanh": {
+          "valid_rmse_every_100_epochs": {
+            "0": 321.4,
+            "100": 92.8,
+            "200": 90.6,
+            "300": 89.6,
+            "400": 88.2,
+            "500": 85.2,
+            "600": 83.6,
+            "700": 83.4,
+            "800": 83.1,
+            "900": 82.9,
+            "1000": 82.8,
+            "1100": 82.8,
+            "1200": 82.7,
+            "1300": 83.6,
+            "1400": 84.3,
+            "1500": 84.7,
+            "1600": 84.9,
+            "1700": 85.1,
+            "1800": 85.3,
+            "1900": 85.6,
+            "2000": 85.8
+          },
+          "best_over_evaluated_epochs": 82.7,
+          "best_over_evaluated_epoch": 1200
+        }
+      },
+      "sigmoid_minus_max_of_relu_tanh_at_epochs": {
+        "600": 3.8,
+        "1000": -2.6,
+        "1500": -4.4,
+        "2000": -3.9
+      },
+      "reading": "600エポックではSigmoidの検証RMSEが2番目より3.8円大きかったが、延長するとSigmoidは約83円まで下がり、ReLU・tanh（83〜87円で揺らぐ）と同じ水準になる。したがって600エポックでの誤差の大きさの順は主に「学び終わる速さ」の差で、エポック数をそろえた比較の結果。600エポック以降の3者の順は安定しない（この追加計測でもSigmoidが最小になる区間があるが、揺らぎの範囲内）。誤差の順を活性化関数の性質そのものとして扱わない。"
+    }
   }
 }

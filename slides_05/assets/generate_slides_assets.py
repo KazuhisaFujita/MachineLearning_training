@@ -31,6 +31,11 @@ FIGURES = {
     15: [('iris_scatter.png', 200)],
     20: [('cls_boundaries.png', 150), ('cls_learning_curve.png', 180)],
     22: [('cls_test.png', 200)],
+    # 5. 発展（活性化関数の比較）
+    26: [('ext_activation_shapes.png', 200)],
+    30: [('ext_reg_compare.png', 170)],
+    31: [('ext_cls_compare.png', 170)],
+    32: [('ext_cls_regions.png', 150)],
 }
 
 # ノートブックは 'datasets/ice.csv' を相対パスで読むため、notebookディレクトリに移動する
@@ -300,6 +305,167 @@ metrics = {
         },
     },
 }
+
+# ---------------------------------------------------------------- 5. 発展: 活性化関数
+# 活性化関数だけ差し替えた比較（スライド45〜48）。手順は本文と同じで、活性化関数のみ違う。
+ext_reg = ns['ext_reg']
+ext_cls = ns['ext_cls']
+ext_sweep = ns['ext_sweep']
+names = ns['iris'].target_names
+
+
+def ext_prediction_yen(result, temp):
+    """発展の回帰モデル（検証RMSEで選択済みの重み）の、気温temp℃での予測額（円）。"""
+    tensor = ns['as_float_tensor'](ns['ice_x_scaler'].transform(pd.DataFrame({ice_feature: [float(temp)]})))
+    result['model'].eval()
+    with torch.no_grad():
+        scaled = result['model'](tensor).numpy()
+    return float(ns['ice_y_scaler'].inverse_transform(scaled)[0, 0])
+
+
+def ext_misclassified(result):
+    wrong = result['test_prediction'] != ns['iris_y_test'].to_numpy()
+    return [
+        {'petal_length': float(row[ns['iris_x_col']]), 'petal_width': float(row[ns['iris_y_col']]),
+         'actual': str(names[actual]), 'predicted': str(names[pred])}
+        for (_, row), actual, pred in zip(ns['iris_X_test'].loc[wrong].iterrows(),
+                                          ns['iris_y_test'].to_numpy()[wrong],
+                                          result['test_prediction'][wrong])
+    ]
+
+
+metrics['activation_extension'] = {
+    'note': 'nn.Sequentialの活性化関数だけをReLU/Sigmoid/Tanhに差し替えた比較。層構成・学習率・エポック数・'
+            '検証用による重み選び・テストの使い方はすべて本文と同じ。同じシードでは同じ初期値から始まる。'
+            'スライド45〜48の数値はここから取る。',
+    'seeds': [int(s) for s in ext_sweep['シード'].unique()],
+    'seed42': {
+        name: {
+            'reg_valid_rmse_epoch0': round(float(ext_reg[name]['history'].loc[0, 'valid_rmse']), 1),
+            'reg_best_epoch': int(ext_reg[name]['best_epoch']),
+            'reg_best_valid_rmse': round(float(ext_reg[name]['best_valid_rmse']), 1),
+            'reg_test_rmse': round(float(ext_reg[name]['test_rmse']), 1),
+            'reg_prediction_at_25c': round(ext_prediction_yen(ext_reg[name], 25.0), 1),
+            'reg_slope_10_to_15c': round(ext_prediction_yen(ext_reg[name], 15.0)
+                                         - ext_prediction_yen(ext_reg[name], 10.0), 1),
+            'reg_slope_25_to_30c': round(ext_prediction_yen(ext_reg[name], 30.0)
+                                         - ext_prediction_yen(ext_reg[name], 25.0), 1),
+            'cls_best_epoch': int(ext_cls[name]['best_epoch']),
+            'cls_best_valid_loss': round(float(ext_cls[name]['best_valid_loss']), 3),
+            # スライド47「検証正解率は3つとも最終的に93.3%」の出典（選択エポック時点と最終エポック時点）
+            'cls_valid_accuracy_at_selected': round(
+                float(ext_cls[name]['history'].loc[int(ext_cls[name]['best_epoch']), 'valid_accuracy']), 3),
+            'cls_valid_accuracy_final': round(float(ext_cls[name]['history']['valid_accuracy'].iloc[-1]), 3),
+            'cls_test_correct': int(ext_cls[name]['test_correct']),
+            'cls_test_total': int(len(ns['iris_y_test'])),
+            'cls_misclassified': ext_misclassified(ext_cls[name]),
+        }
+        for name in ext_reg
+    },
+    # 発展のReLU（シード42）は本文と同じ初期値・手順なので、本文の結果と一致するはず（スライド45の根拠）
+    'identity_check': {
+        'relu_reg_best_epoch': int(ext_reg['ReLU']['best_epoch']) == int(ns['reg_best_epoch']),
+        'relu_reg_best_valid_rmse': bool(np.isclose(ext_reg['ReLU']['best_valid_rmse'], ns['reg_best_rmse'])),
+        'relu_reg_curve_max_abs_diff_yen': round(float(np.max(np.abs(
+            ns['reg_predict_yen'](ns['reg_line_tensor']) - ext_reg['ReLU']['curve']))), 6),
+        'relu_cls_best_epoch': int(ext_cls['ReLU']['best_epoch']) == int(ns['cls_best_epoch']),
+        'relu_cls_best_valid_loss': bool(np.isclose(ext_cls['ReLU']['best_valid_loss'], ns['cls_best_loss'])),
+        'relu_cls_test_correct': int(ext_cls['ReLU']['test_correct']) == int(ns['iris_test_correct'].sum()),
+    },
+    # 乱数シードを5通り変えた同じ比較（Notebook 5節の表と対応）。シードが変わるのは重みの初期値だけで、
+    # データの分け方は本文の random_state=42 のまま。
+    'seed_sweep': {
+        name: {
+            'reg_test_rmse_min': round(float(ext_sweep.query('活性化関数 == @name')['回帰 テストRMSE'].min()), 1),
+            'reg_test_rmse_max': round(float(ext_sweep.query('活性化関数 == @name')['回帰 テストRMSE'].max()), 1),
+            'reg_test_rmse_by_seed': {
+                str(int(row['シード'])): round(float(row['回帰 テストRMSE']), 1)
+                for _, row in ext_sweep.query('活性化関数 == @name').iterrows()
+            },
+            'cls_test_correct_min': int(ext_sweep.query('活性化関数 == @name')['分類 テスト正解'].min()),
+            'cls_test_correct_max': int(ext_sweep.query('活性化関数 == @name')['分類 テスト正解'].max()),
+            'cls_test_correct_by_seed': {
+                str(int(row['シード'])): int(row['分類 テスト正解'])
+                for _, row in ext_sweep.query('活性化関数 == @name').iterrows()
+            },
+            'reg_best_epochs': [int(v) for v in
+                                ext_sweep.query('活性化関数 == @name')['回帰 選択ep'].tolist()],
+            'cls_best_epochs': [int(v) for v in
+                                ext_sweep.query('活性化関数 == @name')['分類 選択ep'].tolist()],
+        }
+        for name in ext_reg
+    },
+}
+
+# スライド48「Sigmoidが最大は全シードで一貫」の根拠を、_traceable_ な形で残す
+_sweep_pivot = ext_sweep.pivot(index='シード', columns='活性化関数', values='回帰 テストRMSE')
+_gap_by_seed = {
+    str(int(seed)): round(float(_sweep_pivot.loc[seed, 'Sigmoid']
+                               - max(_sweep_pivot.loc[seed, 'ReLU'], _sweep_pivot.loc[seed, 'Tanh'])), 1)
+    for seed in _sweep_pivot.index
+}
+metrics['activation_extension']['seed_sweep']['reg_sigmoid_gap_to_second_by_seed'] = _gap_by_seed
+metrics['activation_extension']['seed_sweep']['reg_order_swaps_relu_tanh'] = sorted(
+    {str(int(seed)): ('ReLU' if _sweep_pivot.loc[seed, 'ReLU'] < _sweep_pivot.loc[seed, 'Tanh'] else 'Tanh')
+     for seed in _sweep_pivot.index}.items())
+
+_identity = metrics['activation_extension']['identity_check']
+assert all(v for v in _identity.values() if isinstance(v, bool)), '発展のReLUが本文の結果を再現できていない'
+assert _identity['relu_reg_curve_max_abs_diff_yen'] == 0.0, '発展のReLUの予測曲線が本文と異なる'
+
+# 600エポックでのSigmoidの誤差の大きさは「速さ」の差。エポックを延ばすと縮まる（スライド46の講師向け補足）。
+# Notebook本文にはない追加実行（reg_vs_linear.pngと同じ扱い）。シード42・回帰・エポック数だけを2000に延長。
+longer_budget = {}
+for name in ext_reg:
+    torch.manual_seed(42)
+    probe_model = torch.nn.Sequential(
+        torch.nn.Linear(1, 16), ns['activations'][name](),
+        torch.nn.Linear(16, 16), ns['activations'][name](),
+        torch.nn.Linear(16, 1),
+    )
+    probe_criterion = torch.nn.MSELoss()
+    probe_optimizer = torch.optim.Adam(probe_model.parameters(), lr=0.01)
+    probe_eval = {}
+    probe_best = float('inf')
+    probe_best_epoch = 0
+    for epoch in range(2001):
+        if epoch > 0:
+            probe_optimizer.zero_grad()
+            probe_loss = probe_criterion(probe_model(ns['reg_X_train']), ns['reg_y_train'])
+            probe_loss.backward()
+            probe_optimizer.step()
+        if epoch % 100 == 0 or epoch == 600:
+            probe_model.eval()
+            with torch.no_grad():
+                probe_pred = ns['ice_y_scaler'].inverse_transform(
+                    probe_model(ns['reg_X_valid']).numpy()).ravel()
+            probe_rmse = float(np.sqrt(mean_squared_error(ns['ice_valid'][ice_target], probe_pred)))
+            probe_eval[str(epoch)] = round(probe_rmse, 1)
+            if probe_rmse < probe_best:
+                probe_best, probe_best_epoch = probe_rmse, epoch
+    longer_budget[name] = {
+        'valid_rmse_every_100_epochs': probe_eval,
+        'best_over_evaluated_epochs': round(probe_best, 1),
+        'best_over_evaluated_epoch': int(probe_best_epoch),
+    }
+sigmoid_minus_second = [
+    longer_budget['Sigmoid']['valid_rmse_every_100_epochs'][str(e)]
+    - max(longer_budget['ReLU']['valid_rmse_every_100_epochs'][str(e)],
+          longer_budget['Tanh']['valid_rmse_every_100_epochs'][str(e)])
+    for e in [600, 1000, 1500, 2000]
+]
+metrics['activation_extension']['longer_budget_probe'] = {
+    'protocol': 'シード42・回帰・学習率0.01は本文と同じ。エポック数だけを2000に延ばし、100エポックごとに検証RMSEを測る追加実行（Notebook本文にはない）',
+    'per_activation': longer_budget,
+    'sigmoid_minus_max_of_relu_tanh_at_epochs': {str(e): round(g, 1) for e, g in
+                                           zip([600, 1000, 1500, 2000], sigmoid_minus_second)},
+    'reading': '600エポックではSigmoidの検証RMSEが2番目より3.8円大きかったが、延長するとSigmoidは約83円まで'
+               '下がり、ReLU・tanh（83〜87円で揺らぐ）と同じ水準になる。したがって600エポックでの誤差の大きさの順は'
+               '主に「学び終わる速さ」の差で、エポック数をそろえた比較の結果。600エポック以降の3者の順は安定しない'
+               '（この追加計測でもSigmoidが最小になる区間があるが、揺らぎの範囲内）。誤差の順を活性化関数の'
+               '性質そのものとして扱わない。',
+}
+
 (ASSETS / 'metrics.json').write_text(json.dumps(metrics, ensure_ascii=False, indent=2), encoding='utf-8')
 print('saved metrics.json')
 
